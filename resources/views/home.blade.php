@@ -60,24 +60,24 @@
                 <?php
                 if(isset($dif)){
                     if (30-$dif->days<=0 and  24-$dif->h<=0  and 59-$dif->i<=0 )//Kalan hakkı buradan ayarlıyoruz
-                     {
-                         echo "
+                    {
+                        echo "
                                      <script>
                                           document.getElementById('yeni_paylasim').style.display='block';
                                           document.getElementById('sure').style.display='none';
                                      </script>
 
                                  ";
-                     }
-                      else{
-                            echo "
+                    }
+                    else{
+                        echo "
                                 <script>
                                     document.getElementById('sure').style.display='block';
                                     document.getElementById('yeni_paylasim').style.display='none';
                                 </script>
 
                             ";
-                        }
+                    }
                 }
                 ?>
             </div>

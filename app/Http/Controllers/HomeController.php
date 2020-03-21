@@ -36,7 +36,7 @@ class HomeController extends Controller
         $butun_paylasimlar = \App\Paylasimlar::orderBy('created_at','desc')->get();
 
 
-        return view('home',compact('paylasimlar','butun_paylasimlar'));
+        return view('home',compact('butun_paylasimlar'));
     }
 
     public function eniyiler(){
