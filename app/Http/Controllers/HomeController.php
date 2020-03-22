@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
@@ -45,11 +46,11 @@ class HomeController extends Controller
         foreach ($eniyiler as $key_eniyi => $eniyi){
             $veri = \App\Paylasimlar::where('id',$eniyi->paylasimlars_id)->first();
             if(isset($veri)){
-                $butun_paylasimlar[]=$veri;
+                array_push($butun_paylasimlar,$veri);
             }
         }
-
-        return view('home',compact('paylasimlar','butun_paylasimlar'));
+        View::share('butun_paylasimlar',$butun_paylasimlar);
+        return view('home');
     }
     public function postekle(Request $request){
         $this->validate(\request(),[

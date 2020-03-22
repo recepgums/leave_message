@@ -10,13 +10,13 @@
         <div class="col-md-8">
             <div id="sure" class="bg-success " style="border-radius:50px;height: 50px;width: 100%;display: block">
 
-                <h2 align="center"  ><span style="color: #3D5170">Yeni Mesaj Hakkına :</span>
+                <h2 align="center"  ><span style="color: #3D5170">Yeni Hatırlatıcı Hakkına :</span>
                     <?php $mytime = Carbon\Carbon::now();
                     $son_paylasim = \App\Paylasimlar::where('user_id',\Auth::user()->id)->orderBy('created_at','desc')->first();
                     ?>
                     @if(isset($son_paylasim))
                         <?php  $dif=$mytime->diff($son_paylasim->created_at); ?>
-                        <span><span class="count">{{30-$dif->days }}</span> Gün <span class="count">{{23-$dif->h }} </span> Saat <span class="count">{{59-$dif->i}}</span> Dakika </span>
+                        <span>{{--<span class="count">{{0-$dif->days }}</span> Gün--}} <span class="count">{{$dif->h }} </span> Saat <span class="count">{{59-$dif->i}}</span> Dakika </span>
                     @else
                         <span>Paylaşımı Bulunmuyor !</span>
                     @endif
@@ -121,7 +121,7 @@
                                     <br>
                                     <span style="font-size:20px; cursor:pointer;" onclick="puan_guncelle(this,0,{{$paylasim_satir->id}})" >&darr;</span>
                                 </div>
-                                <p class="card-text text-muted ">{{$paylasim_satir->paylasim}}</p>
+                                <p class="card-text text-muted text-break " style="word-wrap: break-word;width: 100%">{{$paylasim_satir->paylasim}}</p>
                             </div>
 
                             <div class="card-footer border-top d-flex" style="background-color: #28A745">
