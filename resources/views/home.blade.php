@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-md-2"></div>
                     <div class="col-md-8">
-                        <form action="/panel/yeni_post_ekle" method="POST" >
+                        <form action="{{route('yeni_post_ekle')}}" method="POST" >
                             @csrf
                             <div>
                                 <div >

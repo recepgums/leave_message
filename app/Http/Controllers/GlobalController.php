@@ -14,7 +14,7 @@ class GlobalController extends Controller
         if ($request->hasFile('file')){
             $file = $request->file('file');
             $name = time().'.'. $file->getClientOriginalName();
-            $destinationPath = public_path('/global_files');
+            $destinationPath = public_path('../storage/global_files');
             $file->move($destinationPath,$name);
             $new->file_name = $name;
         }
