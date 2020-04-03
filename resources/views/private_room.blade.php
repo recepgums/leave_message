@@ -94,7 +94,7 @@
                                           onclick="puan_guncelle(this,0,27)">&darr;</span>
                                 </div>
 
-                                    <a href="{{asset('storage/private_room_files/'.$item->file_name)}}"  class="card-text  text-break " style="word-wrap: break-word;width: 100%">
+                                    <a href="{{asset('private_room_files/'.$item->file_name)}}"  class="card-text  text-break " style="word-wrap: break-word;width: 100%">
                                         Dosyayı İndirin
                                     </a>
                                 @endif

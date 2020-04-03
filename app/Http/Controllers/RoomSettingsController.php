@@ -12,7 +12,7 @@ class RoomSettingsController extends Controller
 
     public function show_private_room(Request $request){
         $this->validate($request, [
-            'room_number' => 'required|max:99999999999|integer',
+            'room_number' => 'required|between:1,11|integer',
         ]);
         $number=$request->room_number;
         $all = GuestRoomMessages::where('room_number',$number)->orderBy('created_at','desc')->get();

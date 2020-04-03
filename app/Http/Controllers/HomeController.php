@@ -96,7 +96,7 @@ class HomeController extends Controller
     }
     public function arama(){
         $butun_paylasimlar=\App\Paylasimlar::where('baslik', 'like', '%' . Input::get('aranacak') . '%')->orWhere('paylasim', 'like', '%' . Input::get('aranacak') . '%')->get();
-        return view('home',compact('paylasimlar','butun_paylasimlar'));
+        return view('home',compact($butun_paylasimlar,'butun_paylasimlar'));
 
     }
 

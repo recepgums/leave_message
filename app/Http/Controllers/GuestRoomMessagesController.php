@@ -20,7 +20,7 @@ class GuestRoomMessagesController extends Controller
         if ($request->hasFile('room_file')){
             $file = $request->file('room_file');
             $name = time().'.'. $file->getClientOriginalName();
-            $destinationPath = public_path('../storage/private_room_files');
+            $destinationPath = public_path('/private_room_files');
             $file->move($destinationPath,$name);
             $new->file_name = $name;
         }
