@@ -86,10 +86,10 @@
                     @auth
                         <a href="{{ url('/home') }}">Ana Sayfa</a>
                     @else
-                        <a class="btn btn-outline-light btn-lg" href="{{ route('login') }}">Giriş yap</a>
+                        <a class="btn btn-outline-light btn-lg" href="{{ route('login') }}">Log In</a>
 
                         @if (Route::has('register'))
-                            <a class="btn btn-outline-light btn-lg" href="{{ route('register') }}">Kayıt ol</a>
+                            <a class="btn btn-outline-light btn-lg" href="{{ route('register') }}">Sign Up</a>
                         @endif
                     @endauth
                 </div>
@@ -153,7 +153,7 @@
                             <input class="input-group-seamless sifre"  type="password" placeholder="password..." name="file_password_confirm">
                                 <span onclick="ajax_password(this,{{$item->id}})" class="btn btn-success" >Download</span>
                             @else
-                            <a href="/storage/global_files/{{$item->file_name}}" class="card-text  text-break " style="word-wrap: break-word;width: 100%">
+                            <a href="/storage/global_files/{{$item->file_name}}" target="_blank" class="card-text  text-break "  style="word-wrap: break-word;width: 100%">
                                 Dosyayı İndirin
                             </a>
                             @endif
@@ -245,6 +245,11 @@
              },
              success:function(result){
                  console.log(result);
+                 if(result.status==200){
+                     let path = result.download_link;
+                     alert(path);
+                     window.open(path,'_blank');
+                 }
                  $('.sifre').val("");
              },
              error:function (data) {

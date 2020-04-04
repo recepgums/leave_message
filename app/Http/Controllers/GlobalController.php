@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
+use Illuminate\Routing\UrlGenerator;
 
 class GlobalController extends Controller
 {
+    protected $url;
+
+    public function __construct(UrlGenerator $url)
+    {
+        $this->url = $url;
+    }
+
     public function create_global(Request $request){
         $new = new GlobalRoomMessages;
         $new->title = $request->title;
@@ -33,18 +41,10 @@ class GlobalController extends Controller
         View::share('all_messages',$all_messages);
         return view('/welcome');
     }
-    public function global_password_check(Request $request,$message_id){
-        $data = GlobalRoomMessages::find($message_id);
-        if (password_verify($request->file_password_confirm, $data->password)) {
-            return response()->download(storage_path("app/public/global_files/{$data->file_name}"));
-        }else{
-            return redirect()->back();
-        }
-    }
     public function ajax_password(Request $request){
         $data = GlobalRoomMessages::find($request->id);
         if (password_verify($request->password, $data->password)) {
-            return response()->file(storage_path("app/public/global_files/{$data->file_name}"));
+            return response()->json(['status'=>200,'download_link'=>$this->url->to('/storage/global_files/'.$data->file_name)]);
         }else{
             return "password is incorrect";
         }
