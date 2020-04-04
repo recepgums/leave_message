@@ -28,7 +28,7 @@
                         <div class="input-group input-group-seamless ml-3">
                             <a class="navbar-brand w-25 mr-0" href="#" style="line-height: 25px;">
                                 <div class="d-table m-auto">
-                                    <span onclick="location.href='{{ url('home') }}'";class="d-none d-md-inline ml-1">Leave a message</span>
+                                    <span onclick="location.href='{{ url('/') }}'";class="d-none d-md-inline ml-1">Global File Share Page</span>
                                 </div>
                             </a>
                             <input name="aranacak" class="navbar-search form-control" type="text" placeholder="Ara..." aria-label="Search"> </div>
