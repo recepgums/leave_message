@@ -247,7 +247,6 @@
                  console.log(result);
                  if(result.status==200){
                      let path = result.download_link;
-                     alert(path);
                      window.open(path,'_blank');
                  }
                  $('.sifre').val("");
