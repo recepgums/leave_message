@@ -84,7 +84,7 @@
             @if (Route::has('login'))
                 <div class="">
                     @auth
-                        <a href="{{ url('/home') }}">Ana Sayfa</a>
+                        <a class="btn btn-outline-light bnt-lg" href="{{ url('/home') }}">Home</a>
                     @else
                         <a class="btn btn-outline-light btn-lg" href="{{ route('login') }}">Log In</a>
 
@@ -198,6 +198,13 @@
                 </div><br/>
                 <div style="text-align: center"><input class="btn btn-success"  style="width: 50%" type="submit" value="Send"></div>
             </form>
+            @if (isset($file_size_error))
+                <div >
+                    <ul>
+                        <li class="text-danger">{{$file_size_error}}</li>
+                    </ul>
+                </div>
+            @endif
         </div>
         <br><br><br>
         <h2 style="text-align:center;padding-top:15px;color:#28A745">Share in private room</h2>

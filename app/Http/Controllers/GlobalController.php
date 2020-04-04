@@ -19,21 +19,27 @@ class GlobalController extends Controller
     }
 
     public function create_global(Request $request){
-        $new = new GlobalRoomMessages;
-        $new->title = $request->title;
-        if ($request->hasFile('file')){
-            $filenameWithExt = $request->file('file')->getClientOriginalName();
-            $fileName = pathinfo($filenameWithExt,PATHINFO_FILENAME);
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('file')->storeAs('public/global_files',$fileNameToStore);
-            $new->file_name = $fileNameToStore;
+        $size = $request->file('file')->getSize();
+        if($size<=10240){
+            $new = new GlobalRoomMessages;
+            $new->title = $request->title;
+            if ($request->hasFile('file')){
+                $filenameWithExt = $request->file('file')->getClientOriginalName();
+                $fileName = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+                $extension = $request->file('file')->getClientOriginalExtension();
+                $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+                $path = $request->file('file')->storeAs('public/global_files',$fileNameToStore);
+                $new->file_name = $fileNameToStore;
+            }
+            if($request->password){
+                $new->password =Hash::make($request->password);
+            }
+            $new->save();
+            return redirect('/');
         }
-        if($request->password){
-           $new->password =Hash::make($request->password);
-        }
-        $new->save();
-        return redirect('/');
+        $file_size_error="maximum upload file size 10 mb";
+        View::share('file_size_error',$file_size_error);
+        return view('welcome');
     }
 
     public function home_page(){
