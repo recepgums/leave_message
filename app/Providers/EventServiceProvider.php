@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\SendMessage'=>[
+            'App\Listeners\WriteMessageToFile',
+        ]
     ];
 
     /**
@@ -29,6 +32,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        Event::listen('SendMessage',function (){
+            dd("EventServiceProvider");
+        });
     }
 }

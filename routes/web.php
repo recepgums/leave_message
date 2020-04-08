@@ -21,5 +21,15 @@ Route::post('/private_room_create/{room_number}','GuestRoomMessagesController@cr
 
 Route::post('ajaxdeneme','GlobalController@ajax_password')->name('ajax_password');
 
-
+Route::get('test', function(){
+    broadcast(new \App\Events\SendMessage);
+});
+Route::get('/t', function () {
+    event(new \App\Events\SendMessage());
+    dd('Event Run Successfully.');
+});
+Route::get('add-notification', function() {
+    broadcast(new \App\Events\SendMessage);
+    return 'Bildirim Gönderildi.';
+});
 

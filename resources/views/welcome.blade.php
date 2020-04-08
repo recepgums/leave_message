@@ -6,6 +6,7 @@
 
     <title>Leave Message</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
@@ -71,7 +72,8 @@
         html{ overflow-y: scroll;}
     </style>
 </head>
-<body style="/*background-image: url('https://i.ytimg.com/vi/aiU22lKiZbA/maxresdefault.jpg');*/">
+<body onload="page_loaded()" style="/*background-image: url('https://i.ytimg.com/vi/aiU22lKiZbA/maxresdefault.jpg');*/">
+
 <div style="display: flex;background-color: #0c673b">
     <div style="flex:8">
         asd
@@ -128,17 +130,21 @@
         new questions
     </div>
 </div>
+
 <br>
 <div class="row">
     <div
          style="overflow-y:scroll;height: 550px;float:left;width: 60%; border-style: solid;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745;border-width: 12px; margin-left: 10%">
-        @foreach( $all_messages as $item)
-
-        <div>
+        <div id="app">
+            <example-component></example-component>
+        </div>
+        <script src="/js/app.js"></script>
+        {{--@foreach( $all_messages as $item)
+        <div id="notification">
             <div class="col-lg-11 ">
                 <div class="card card-small card-post mb-4" name="kart">
                     <div class="card-body row ">
-                        <h5 class="card-title col-md-10 ">{{$item->title}}</h5>
+                        <h5 class="card-title col-md-10 " id="title">{{$item->title}} </h5>
                         @if($item->file_name)
                             <div class="card-title col-md-2 ">
                             <span style="font-size:20px; cursor:pointer;"
@@ -181,7 +187,7 @@
             </div>
         </div>
         <br>
-       @endforeach
+       @endforeach--}}
     </div>
     <div style="float:right">
         <br><br>
@@ -208,7 +214,7 @@
         </div>
         <br><br><br>
         <h2 style="text-align:center;padding-top:15px;color:#28A745">Share in private room</h2>
-        <span style="word-wrap: break-word;text-align:center;padding-top:15px;color:#28A745">Choose a random numbered room to share your file with</span>
+        <span style="word-wrap: break-word;text-align:center;padding-top:15px;color:#28A745;margin-left: 5px;">Choose a random numbered room to share your file with</span>
         <div class="row align-items-center justify-content-center" style="height: 20%;padding-left: 20px">
             <form action="{{route('show_private_room')}}" method="get"  >
                 @csrf
@@ -230,6 +236,11 @@
         @endif
     </div>
     <script >
+        page_loaded=()=>{
+            $.get(
+                "/test",
+            );
+        };
        let a = document.getElementById('file_input');
        let b = document.getElementById('password_input');
        a.onchange = function () {
@@ -265,4 +276,38 @@
      }
  </script>
 </body>
+<script>
+    window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
+</script>
+
+<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+<script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript"></script>
+
+<script>
+   /* new Vue({
+        el: "#notification",
+        data: {
+            data:[],
+            item:"yeni"
+        },
+        mounted(){
+            window.Echo.channel('user-channel')
+                .listen('.UserEvent', (data) => {
+                    this.data=data.data;
+                    j=0;
+                    $("#notification").empty();
+                    for (j = 0; j < data.data.length; j++) {
+                        $("#notification").append('<div class="alert alert-success">'+(j+1) + data.data[j].title+'</div>');
+                    }
+                });
+        }
+    });*/
+</script>
 </html>
+{{--
+
+for (j = 0; j < data.data.length; j++) {
+console.log(data.data[j].title);
+$("#notification").append('<div class="alert alert-success">'+data.data[j].title+'</div>');
+}
+--}}

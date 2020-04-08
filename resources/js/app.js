@@ -19,9 +19,12 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
-
+import Content from "./components/Content";
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('Content', require('./components/Content.vue'));
+import BootstrapVue from 'bootstrap-vue' //Importing
 
+Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,5 +32,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components:{
+        'content-component': require('./components/Content.vue')
+    }
 });
