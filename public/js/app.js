@@ -52845,13 +52845,12 @@ if (token) {
 //     encrypted: true
 // });
 
-
 window.io = __webpack_require__(310);
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */]({
     broadcaster: 'socket.io',
     host: window.location.hostname + ':6001'
 });
-window.Echo.channel('user-channel').listen('SendMessage', function (e) {
+window.Echo.channel('user-channel').listen('.SendMessage', function (e) {
     console.log(e);
 });
 
@@ -92725,11 +92724,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.data = data.data;
             console.log(_this.data);
             /* let j;
-             j=0;
-             $("#notification").empty();
-             for (j = 0; j < data.data.length; j++) {
-                 $("#notification").append('<div class="alert alert-success">'+(j+1) + data.data[j].title+'</div>');
-             }*/
+            j=0;
+            $("#notification").empty();
+            for (j = 0; j < data.data.length; j++) {
+            $("#notification").append('<div class="alert alert-success">'+(j+1) + data.data[j].title+'</div>');
+            }*/
         });
     }
 });
@@ -92803,30 +92802,7 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "card-footer ",
-                staticStyle: { "background-color": "#28A745" }
-              },
-              [
-                _c("div", { staticClass: "card-post__author d-flex" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-11 d-flex flex-column justify-content-center ",
-                      staticStyle: { float: "right" }
-                    },
-                    [
-                      _c("small", { staticClass: "text-white" }, [
-                        _vm._v(_vm._s(item.created_at))
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            )
+            _vm._m(0, true)
           ]
         )
       ])
@@ -92834,7 +92810,22 @@ var render = function() {
     0
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticStyle: { "background-color": "#28A745" } }, [
+      _c("div", { staticClass: " " }, [
+        _c("div", { staticStyle: { "text-align": "right" } }, [
+          _c("small", { staticClass: "text-white" }, [
+            _vm._v("{{item.created_at}")
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

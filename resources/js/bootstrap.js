@@ -55,13 +55,12 @@ if (token) {
 //     encrypted: true
 // });
 import Echo from 'laravel-echo'
-
 window.io = require('socket.io-client');
 window.Echo = new Echo({
     broadcaster: 'socket.io',
     host: window.location.hostname + ':6001'
 });
 window.Echo.channel('user-channel')
-    .listen('SendMessage', (e) => {
+    .listen('.SendMessage', (e) => {
         console.log(e);
     });

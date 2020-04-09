@@ -20,6 +20,7 @@ Route::get('/private_room','RoomSettingsController@show_private_room')->name('sh
 Route::post('/private_room_create/{room_number}','GuestRoomMessagesController@create_private_room_message')->name('create_private_room_message');
 
 Route::post('ajaxdeneme','GlobalController@ajax_password')->name('ajax_password');
+Route::post('ajaxprivate','GuestRoomMessagesController@ajax_private')->name('ajax_private');
 
 Route::get('test', function(){
     broadcast(new \App\Events\SendMessage);

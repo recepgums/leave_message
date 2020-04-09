@@ -17,10 +17,10 @@
                         Dosyayı İndirin
                     </a>
                 </div>
-                <div class="card-footer " style="background-color: #28A745">
-                    <div class="card-post__author d-flex">
-                        <div class="col-11 d-flex flex-column justify-content-center " style="float: right">
-                            <small class="text-white">{{item.created_at}}</small>
+                <div style="background-color: #28A745">
+                    <div class=" ">
+                        <div  style="text-align: right">
+                            <small class="text-white">{{item.created_at}</small>
                         </div>
                     </div>
                 </div>
@@ -37,19 +37,18 @@
                 data:[]
             }
         },
-        mounted() {
-            window.Echo.channel('user-channel')
-                .listen('.UserEvent', (data) => {
-                    this.data=data.data;
-                    console.log(this.data);
-                   /* let j;
+            mounted() {
+                window.Echo.channel('user-channel')
+                    .listen('.UserEvent', (data) => {
+                        this.data = data.data;
+                        console.log(this.data);
+                        /* let j;
                     j=0;
                     $("#notification").empty();
                     for (j = 0; j < data.data.length; j++) {
                         $("#notification").append('<div class="alert alert-success">'+(j+1) + data.data[j].title+'</div>');
                     }*/
-                });
-
+                    });
+            }
         }
-    }
 </script>

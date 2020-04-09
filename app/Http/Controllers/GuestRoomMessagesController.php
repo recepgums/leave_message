@@ -6,10 +6,18 @@ use App\GlobalRoomMessages;
 use App\GuestRoomMessages;
 use App\RoomSetting;
 use Illuminate\Http\Request;
+use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 
 class GuestRoomMessagesController extends Controller
 {
+    private $url;
+    public function __construct(UrlGenerator $url)
+    {
+        $this->url = $url;
+    }
+
     public function create_private_room_message(Request $request){
         $this->validate($request, [
             'file' => 'max:10240',
@@ -18,13 +26,27 @@ class GuestRoomMessagesController extends Controller
         $new->room_number = $request->room_number;
         $new->title = $request->title;
         if ($request->hasFile('room_file')){
-            $file = $request->file('room_file');
-            $name = time().'.'. $file->getClientOriginalName();
-            $destinationPath = public_path('/private_room_files');
-            $file->move($destinationPath,$name);
-            $new->file_name = $name;
+            $filenameWithExt = $request->file('room_file')->getClientOriginalName();
+            $fileName = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+            $extension = $request->file('room_file')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+            $path = $request->file('room_file')->storeAs('public/private_room_files',$fileNameToStore);
+            $new->file_name = $fileNameToStore;
+        }
+        if($request->password){
+            $new->password =Hash::make($request->password);
         }
         $new->save();
+
+
         return redirect()->back()->withErrors($request->all());
+    }
+    public function ajax_private(Request $request){
+        $data = GuestRoomMessages::find($request->id);
+        if (password_verify($request->password, $data->password)) {
+            return response()->json(['status'=>200,'download_link'=>$this->url->to('/storage/private_room_files/'.$data->file_name)]);
+        }else{
+            return response()->json(['status'=>400,'message'=>"password incorrect"]);
+        }
     }
 }
