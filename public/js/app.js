@@ -69950,7 +69950,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */](
     broadcaster: 'socket.io',
     host: window.location.hostname + ':6001'
 });
-window.Echo.channel('user-channel').listen('SendMessage', function (e) {
+window.Echo.channel('user-channel').listen('.SendMessage', function (e) {
     console.log(e);
 });
 

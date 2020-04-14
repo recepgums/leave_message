@@ -324,11 +324,11 @@
 
 <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
 {{--<script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript"></script>--}}
+{{--<script src="http://www.recepgumus.com:6001/socket.io/socket.io.js"  ></script>--}}
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 
 <script>
-   /* new Vue({
-        el: "#notification",
+   new Vue({
         data: {
             data:[],
             item:"yeni"
@@ -337,14 +337,10 @@
             window.Echo.channel('user-channel')
                 .listen('.UserEvent', (data) => {
                     this.data=data.data;
-                    j=0;
-                    $("#notification").empty();
-                    for (j = 0; j < data.data.length; j++) {
-                        $("#notification").append('<div class="alert alert-success">'+(j+1) + data.data[j].title+'</div>');
-                    }
+                    alert("hey");
                 });
         }
-    });*/
+    });
 </script>
 </html>
 {{--

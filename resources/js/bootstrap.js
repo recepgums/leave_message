@@ -61,6 +61,6 @@ window.Echo = new Echo({
     host: window.location.hostname + ':6001'
 });
 window.Echo.channel('user-channel')
-    .listen('SendMessage', (e) => {
+    .listen('.SendMessage', (e) => {
         console.log(e);
     });
