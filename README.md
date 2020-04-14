@@ -2,7 +2,7 @@
 
 live: 
 
-recepgumus.com
+http://recepgumus.com
 
 
 
