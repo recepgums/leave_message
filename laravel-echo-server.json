@@ -1,7 +1,8 @@
 {
-	"authHost": "http://localhost",
+	"authHost": "http://recepgumus.com",
 	"authEndpoint": "/broadcasting/auth",
-	"clients": [],
+	"clients": [
+	],
 	"database": "redis",
 	"databaseConfig": {
 		"redis": {},
@@ -10,7 +11,7 @@
 		}
 	},
 	"devMode": true,
-	"host": null,
+	"host": "recepgumus.com",
 	"port": "6001",
 	"protocol": "http",
 	"socketio": {},

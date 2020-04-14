@@ -2,6 +2,7 @@
 
 Route::get('/', 'GlobalController@home_page');
 
+Broadcast::routes();
 
 Auth::routes();
 
