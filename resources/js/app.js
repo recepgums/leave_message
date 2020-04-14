@@ -21,8 +21,11 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 import Content from "./components/Content";
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('Content', require('./components/Content.vue'));
+Vue.component('quiz', require('./components/quiz.vue'));
 import BootstrapVue from 'bootstrap-vue' //Importing
+import moment from 'moment'
+
+Vue.prototype.moment = moment
 
 Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 /**
@@ -33,7 +36,8 @@ Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 
 const app = new Vue({
     el: '#app',
-    components:{
-        'content-component': require('./components/Content.vue')
-    }
+});
+
+const quiz = new Vue({
+    el: '#quiz',
 });

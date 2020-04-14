@@ -5,11 +5,11 @@
                 <div class="card-body row ">
                     <h5 class="card-title col-md-10 ">{{item.title}}</h5>
                     <div class="card-title col-md-2 ">
-
                     </div>
                 </div>
                 <div v-if="item.password !== null">
                     <input class="input-group-seamless sifre"  type="password" placeholder="password..." name="file_password_confirm">
+                    {{item.id}}
                     <span onclick="ajax_password(this,item.id)" class="btn btn-success" >Download</span>
                 </div>
                 <div v-else-if="item.file_name !== null">
@@ -20,7 +20,7 @@
                 <div style="background-color: #28A745">
                     <div class=" ">
                         <div  style="text-align: right">
-                            <small class="text-white">{{item.created_at}</small>
+                            <small class="text-white">{{item.created_at}}</small>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                 window.Echo.channel('user-channel')
                     .listen('.UserEvent', (data) => {
                         this.data = data.data;
-                        console.log(this.data);
+                        console.log(this.data[0].created_at)
                         /* let j;
                     j=0;
                     $("#notification").empty();

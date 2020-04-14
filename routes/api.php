@@ -19,3 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/deneme',function (){
     return \App\User::all()->toJson();
 });
+Route::get('/survey', function (){
+    $data = \App\GlobalQuestions::all();
+
+   return response()->json(['status'=>200,'data'=>$data]);
+});

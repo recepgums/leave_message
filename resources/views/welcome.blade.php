@@ -23,7 +23,9 @@
             height: 100vh;
             margin: 0;
         }
-
+        .full-width{
+          width: 100%;
+        }
         .full-height {
             height: 100vh;
         }
@@ -43,7 +45,20 @@
             right: 10px;
             top: 18px;
         }
-
+        .busacmabirdeneme{
+            cursor: pointer;
+            justify-content: center;
+            text-align: center;
+            background-color: white;
+            color:black
+        }
+        .busacmabirdeneme:hover{
+            cursor: pointer;
+            justify-content: center;
+            text-align: center;
+            background-color: green;
+            color:white
+        }
         .content {
             text-align: center;
         }
@@ -61,7 +76,16 @@
             text-decoration: none;
             text-transform: uppercase;
         }
-
+        .one-edge-shadow {
+            -webkit-box-shadow: 0 8px 6px -6px black;
+            -moz-box-shadow: 0 8px 6px -6px black;
+            box-shadow: 0 8px 6px -6px black;
+        }
+        .shadow {
+            -moz-box-shadow: 0 0 3px #000;
+            -webkit-box-shadow: 0 0 3px #000;
+            box-shadow: 0 0 3px #000;
+        }
         .m-b-md {
             margin-bottom: 30px;
         }
@@ -102,36 +126,40 @@
     </div>
 </div>
 
-<div class="col-md col-sm col-lg" style="display: flex;background-color: gray;height: auto">
-    <div style="flex:3">
-        <div class="row" style="overflow-x: auto;">
-            @foreach($all_messages as $key=>$item)
-                @if($key>4)
-                    <button class="btn btn-primary" > <span class="glyphicon glyphicon-play-circle"></span></button>
-                @else
-            <div class="col-lg-2 col-md-2  col-sm">
-                <div class="card card-small card-post mb-2" name="kart">
-                    <div class="card-body row ">
-                            <div class="card-title col-md-2 ">
-                            <span style="font-size:10px; cursor:pointer;">&uarr;</span>
-                                <br>
-                                <span class="paylasilanin_puani">0</span>
-                                <br>
-                                <span style="font-size:10px; cursor:pointer;" >&darr;</span>
-                            </div>
-                      </div>
-                 </div>
-             </div>
-                @endif
-            @endforeach
-        </div>
+<div class="col-md col-sm col-lg p-2" style="display: flex;background-color: gray;height: auto;">
+    <div id="quiz" style="flex:4" >
+       <quiz>
+
+       </quiz>
     </div>
-    <div style="flex: 1">
-        new questions
+    <div style="flex: 1" class="shadow" >
+        <div class="card card-small shadow " style="width: 288px;">
+            <form action="{{route('create_survey')}}" method="post">
+                @csrf
+                <div class="card-header " style="background-color: #152632;color:white;font-size: 20px;text-align: center;">
+                    <input name="question_title" type="text" class="form-control " placeholder="Ask a question...">
+                </div>
+                <div id="options_parent" class="list-group list-group-flush p-2" >
+                    <input id="answer" name="answer" style="border-color: #28A745;border-width: 2px" class="form-control mb-1" type="text" placeholder="Answer of question..." required>
+                    <input id="option_2" name="option_2" class="form-control" type="text" placeholder="Other option one..." required >
+                    <input id="option_3" style="display: none" name="option_3" class="form-control" type="text" placeholder="Other option two..."  >
+                    <input id="option_4" style="display: none" name="option_4" class="form-control" type="text" placeholder="Other option three..."  >
+                </div>
+                <div class="row ml-1">
+                    <div class="col-7">
+                        <a id="new_options_button" onclick="new_input()" class="btn btn-dark text-white">New Options</a>
+                    </div>
+                    <div class="col-5">
+                        <input class="btn btn-success" type="submit" value="Share">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 <br>
+
 <div class="row">
     <div
          style="overflow-y:scroll;height: 550px;float:left;width: 60%; border-style: solid;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745;border-width: 12px; margin-left: 10%">
@@ -252,6 +280,7 @@
 </div>
  <script>
      function ajax_password(event,id) {
+         alert("id");
          var password = $(event).prev().val();
          $.ajax({
              type:"post",
@@ -277,11 +306,25 @@
  </script>
 </body>
 <script>
+    var quiz_counter=0;
+    new_input = function(){
+        quiz_counter+=1;
+        if(quiz_counter==1){
+            $('#option_3').css('display','block');
+        }
+        else if(quiz_counter==2){
+            $('#option_4').css('display','block');
+            $('#new_options_button').css('display','none');
+        }
+    }
+</script>
+<script>
     window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
 </script>
 
 <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
-<script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript"></script>
+{{--<script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript"></script>--}}
+<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 
 <script>
    /* new Vue({
