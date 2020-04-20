@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PrivateMessage;
 use App\GuestRoomMessages;
 use App\RoomSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Nexmo\Call\Event;
 
 class RoomSettingsController extends Controller
 {
@@ -23,6 +25,7 @@ class RoomSettingsController extends Controller
         }
         View::share('all',$all);
         View::share('number',$number);
+        event(new PrivateMessage($request->room_number));
         return view('private_room')->withErrors($request->all());
 
     }

@@ -48,3 +48,7 @@ Route::post('create_survey',function (Request $request){
     $data->save();
     return redirect()->back();
 })->name('create_survey');
+
+/*Route::get('private-test', function(){
+    broadcast(new \App\Events\PrivateMessage);
+});*/

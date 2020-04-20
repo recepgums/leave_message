@@ -1,8 +1,8 @@
 <template>
-    <div class="  " style="overflow-x: scroll">
+    <div class="  " style="overflow-x: scroll;overflow-y:hidden;position: relative">
         <div class="row"  >
             <div v-if="index<4" class="col"   v-for="(item,index) in data" style="overflow-x: scroll;display:table" >
-                <div class="card card-small card-post mb-2"  name="kart"  >
+                <div class="card card-small card-post mb-2"  name="kart"  style="width: 225px" >
                     <div class="card-header   " style="background-color: #152632;color:white;font-size: 15px;text-align: center;">
                             {{item.question_title}}
                     </div>
@@ -22,11 +22,11 @@
                     </div>
                 </div>
             </div>
-            <div >
+           <!-- <div >
                 <button  @click="moreSurvey" class="btn wrapper mr-3 " style="height:97%;align-text:center">
                     >>
                 </button>
-            </div>
+            </div>-->
         </div>
     </div>
 </template>

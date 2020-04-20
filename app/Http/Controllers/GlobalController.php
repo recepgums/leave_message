@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\GlobalRoomMessages;
+use App\GuestRoomMessages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -24,11 +25,12 @@ class GlobalController extends Controller
         $new->title = $request->title;
         if ($request->hasFile('file')){
             $filenameWithExt = $request->file('file')->getClientOriginalName();
+            $filenameWithExt = trim($filenameWithExt);
             $fileName = pathinfo($filenameWithExt,PATHINFO_FILENAME);
             $extension = $request->file('file')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
             $path = $request->file('file')->storeAs('public/global_files',$fileNameToStore);
-            $new->file_name = $fileNameToStore;
+        $new->file_name = $fileNameToStore;
         }
         if($request->password){
             $new->password =Hash::make($request->password);
@@ -48,8 +50,10 @@ class GlobalController extends Controller
         if (password_verify($request->password, $data->password)) {
             return response()->json(['status'=>200,'download_link'=>$this->url->to('/storage/global_files/'.$data->file_name)]);
         }else{
-            return "password is incorrect";
+            return response()->json(['status'=>400,'message'=>"password incorrect"]);
         }
     }
+
+
 
 }

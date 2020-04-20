@@ -24,6 +24,7 @@
         "laravel-echo": "^1.7.0",
         "moment": "^2.24.0",
         "socket.io": "^2.3.0",
-        "socket.io-client": "^2.3.0"
+        "socket.io-client": "^2.3.0",
+        "vue-youtube-embed": "^2.2.2"
     }
 }

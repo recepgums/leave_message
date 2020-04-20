@@ -64,3 +64,8 @@ window.Echo.channel('user-channel')
     .listen('.SendMessage', (e) => {
         console.log(e);
     });
+
+window.Echo.channel('room-channel')
+    .listen('.RoomEvent', (e) => {
+        console.log(e);
+    });

@@ -27,8 +27,12 @@ class GuestRoomMessagesController extends Controller
         $new->title = $request->title;
         if ($request->hasFile('room_file')){
             $filenameWithExt = $request->file('room_file')->getClientOriginalName();
+            $filenameWithExt = trim($filenameWithExt);
             $fileName = pathinfo($filenameWithExt,PATHINFO_FILENAME);
             $extension = $request->file('room_file')->getClientOriginalExtension();
+            if($extension==='php'){
+                return "php file can't upload, try again after compression it";
+            }
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
             $path = $request->file('room_file')->storeAs('public/private_room_files',$fileNameToStore);
             $new->file_name = $fileNameToStore;
