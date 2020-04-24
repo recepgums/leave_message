@@ -278,7 +278,7 @@
 <script>
     window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
 </script>
-<script src="http://www.recepgumus.com:6001/socket.io/socket.io.js"  ></script>
+<script src="http://127.0.0.1:6001/socket.io/socket.io.js"  ></script>
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 
 <script>

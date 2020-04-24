@@ -162,7 +162,7 @@
                 b.style.height = "30px";
             }
         </script>
-</div>
+
     <script>
         window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
     </script>
