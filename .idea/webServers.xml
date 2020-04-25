@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9cfddc64-d2ed-4e4b-bfcc-12310fc6cb44" name="recepo" url="http://176.53.81.198">
+        <fileTransfer host="176.53.81.198" port="22" rootFolder="/www/wwwroot/recepgumus.com/leave_message" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
