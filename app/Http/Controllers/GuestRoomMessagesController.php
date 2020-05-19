@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PrivateMessage;
 use App\GlobalRoomMessages;
 use App\GuestRoomMessages;
 use App\RoomSetting;
@@ -41,6 +42,7 @@ class GuestRoomMessagesController extends Controller
             $new->password =Hash::make($request->password);
         }
         $new->save();
+        event(new PrivateMessage($request->room_number));
 
 
         return redirect()->back()->withErrors($request->all());

@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 
 Route::get('/', 'GlobalController@home_page');
-
 Broadcast::routes();
 
 Auth::routes();
@@ -28,16 +27,8 @@ Route::post('ajaxprivate','GuestRoomMessagesController@ajax_private')->name('aja
 Route::get('test', function(){
     broadcast(new \App\Events\SendMessage);
 });
-Route::get('/t', function () {
-    event(new \App\Events\SendMessage());
-    dd('Event Run Successfully.');
-});
-Route::get('add-notification', function() {
-    broadcast(new \App\Events\SendMessage);
-    return 'Bildirim Gönderildi.';
-});
 
-Route::post('create_survey',function (Request $request){
+/*Route::post('create_survey',function (Request $request){
     $data = new \App\GlobalQuestions();
     $data->question_title = $request->question_title;
     $data->option_one = $request->answer;
@@ -47,7 +38,7 @@ Route::post('create_survey',function (Request $request){
     $data->correct_answer = $request->answer;
     $data->save();
     return redirect()->back();
-})->name('create_survey');
+})->name('create_survey');*/
 
 /*Route::get('private-test', function(){
     broadcast(new \App\Events\PrivateMessage);

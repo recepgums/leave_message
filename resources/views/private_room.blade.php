@@ -142,7 +142,7 @@
              style="overflow-y:scroll;height: 1900px;float:left;width: 100%; border-style: solid;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745;border-width: 12px;margin-right: 16px ">
 
             <div id="app">
-                <privateroom>
+                <privateroom :number="{{ $number }}">
 
                 </privateroom>
             </div>
@@ -180,9 +180,6 @@
 <script>
 
      start=()=> {
-        /* $.get(
-             "/private-test",
-         );*/
         setTimeout(function () {
             var time= setInterval(function () {
                 var value=(document.getElementById("animation").style.fontSize);
@@ -198,7 +195,6 @@
                 }
             }, 100);
         },1000);
-
     }
 </script>
 </body>

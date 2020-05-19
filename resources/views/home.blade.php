@@ -121,7 +121,7 @@
                                     <br>
                                     <span style="font-size:20px; cursor:pointer;" onclick="puan_guncelle(this,0,{{$paylasim_satir->id}})" >&darr;</span>
                                 </div>
-                                <p class="card-text text-muted text-break " style="word-wrap: break-word;width: 100%">{{$paylasim_satir->paylasim}}</p>
+                                <p class="card-text text-muted ">{{$paylasim_satir->paylasim}}</p>
                             </div>
 
                             <div class="card-footer border-top d-flex" style="background-color: #28A745">

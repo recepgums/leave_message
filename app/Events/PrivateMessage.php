@@ -2,12 +2,9 @@
 
 namespace App\Events;
 
-use App\GlobalRoomMessages;
 use App\GuestRoomMessages;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -15,16 +12,16 @@ class PrivateMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $room_id ;
+    public  $room_number;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($room_id)
+    public function __construct( $room_number)
     {
-        $this->room_id = $room_id;
+        $this->room_number = $room_number;
     }
 
     /**
@@ -34,7 +31,7 @@ class PrivateMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('room-channel');
+        return new Channel('room-channel.'.$this->room_number);
     }
 
     /**
@@ -53,7 +50,7 @@ class PrivateMessage implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        $all_messages = GuestRoomMessages::where('room_number',$this->room_id)->orderBy('created_at','desc')->get();
+        $all_messages = GuestRoomMessages::where('room_number',$this->room_number)->orderBy('created_at','desc')->get();
         return [
             'data' => $all_messages
         ];

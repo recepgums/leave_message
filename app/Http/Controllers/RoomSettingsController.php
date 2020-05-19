@@ -27,6 +27,5 @@ class RoomSettingsController extends Controller
         View::share('number',$number);
         event(new PrivateMessage($request->room_number));
         return view('private_room')->withErrors($request->all());
-
     }
 }

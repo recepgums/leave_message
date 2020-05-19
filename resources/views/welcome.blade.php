@@ -232,7 +232,7 @@
 <div class="row" style="text-align: center;justify-content: center;">
 
     <div class=" mb-2 ml-3"
-        style="overflow-y:scroll;height: 1900px;float:left;width: 100%; border-style: solid;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745;border-width: 12px;margin-right: 16px ">
+        style="overflow-y:scroll;height: 1000px;float:left;width: 100%; border-style: solid;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745;border-width: 12px;margin-right: 16px ">
         <div id="app">
             <example-component></example-component>
         </div>
@@ -262,7 +262,7 @@
     });
 </script>
 </body>
-<script>
+{{--<script>
     var quiz_counter=0;
     new_input = function(){
         quiz_counter+=1;
@@ -274,22 +274,11 @@
             $('#new_options_button').css('display','none');
         }
     }
-</script>
+</script>--}}
 <script>
     window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
 </script>
 <script src="http://127.0.0.1:6001/socket.io/socket.io.js"  ></script>
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 
-<script>
-    var tab_1 = document.getElementById('tab-1');
-    var tab_2 = document.getElementById('tab-2');
-    if (screen.width < 600) {
-        tab_1.style.flex = 1;
-        tab_2.style.flex = 10;
-    }
-    else {
-        tab_1.style.flex = 8;
-    }
-</script>
 </html>

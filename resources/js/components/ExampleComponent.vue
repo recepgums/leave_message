@@ -6,13 +6,15 @@
 
                   </div>
                   <div class="card-body row text-center " style="height:10px;">
-                      <div v-if="item.title.includes('www.youtube.com') || item.title.includes('m.youtube.com') "
+                      <div v-if="item.title.includes('www.youtube.com') || item.title.includes('m.youtube.com') || item.title.includes('youtu.be') "
                            class="iframe-container text-center align-self-center "  >
-
                           <iframe width="1024" height="768" :src="youtube_link(item.title)" frameborder="0"
                                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                   allowfullscreen></iframe>
-
+                      </div>
+                      <div v-else-if="item.title.includes('open.spotify.com')" class="iframe-container text-center align-self-center " >
+                         <iframe :src="spotify(item.title)" frameborder="0"  allowtransparency="true" allow="encrypted-media">
+                         </iframe>
                       </div>
                       <h5 v-else class=" col-12 text-center" >{{item.title}}</h5>
                       <div v-if="item.password !== null" class="text-center" style="margin-left: auto;margin-right: auto;">
@@ -51,15 +53,14 @@
             }
         },
         mounted() {
+            axios.get('http://127.0.0.1:8000/api/')
+                .then((response)=>{
+                    this.data = response.data;
+                    console.log("ahoj");
+                });
             window.Echo.channel('user-channel')
                 .listen('.UserEvent', (data) => {
                     this.data = data.data;
-                    /* let j;
-                j=0;
-                $("#notification").empty();
-                for (j = 0; j < data.data.length; j++) {
-                    $("#notification").append('<div class="alert alert-success">'+(j+1) + data.data[j].title+'</div>');
-                }*/
                 });
             for (var i = 0; i<this.data.length; i++){
                 this.data[i].push({
@@ -80,9 +81,17 @@
 
             },
             youtube_link:function(url){
+                if (url.includes('youtu.be')){
+                    return  url.replace('youtu.be/','www.youtube.com/embed/');
+                }
+                else if (url.includes('list')){
+                    return   'https://www.youtube.com/embed/'+url.substring(url.indexOf('watch?v=')+8,url.indexOf('&list'));
+                }
                 return 'https://www.youtube.com/embed/'+url.substring(url.indexOf('watch?v=')+8);
+            },
+            spotify:function (url) {
+                return url.replace('spotify.com/','spotify.com/embed/');
             }
-
         }
     }
 </script>

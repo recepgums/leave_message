@@ -1,5 +1,6 @@
 <?php
 
+use App\GuestRoomMessages;
 use Illuminate\Http\Request;
 
 /*
@@ -21,6 +22,13 @@ Route::get('/deneme',function (){
 });
 Route::get('/survey', function (){
     $data = \App\GlobalQuestions::all();
-
    return response()->json(['status'=>200,'data'=>$data]);
+});
+Route::get('/private_room/{number}',function ($number){
+    $data = \App\GuestRoomMessages::where('room_number',$number)->orderBy('created_at','desc')->get();
+    return $data;
+});
+Route::get('/',function (){
+    $data = \App\GlobalRoomMessages::orderBy('created_at','desc')->get();
+    return $data;
 });
