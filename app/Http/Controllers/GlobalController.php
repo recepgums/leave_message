@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use Illuminate\Routing\UrlGenerator;
 use App\Events\SendMessage;
+use Illuminate\Support\Facades\Validator;
 
 class GlobalController extends Controller
 {
@@ -19,6 +20,15 @@ class GlobalController extends Controller
     }
 
     public function create_global(Request $request){
+        /*$rules = array(
+            'file'=>'required|max:1000'
+        );
+        $error = Validator::make($request->all(),$rules);*/
+
+        /*if ($error->fails()){
+            return response()->json(['error'=>$error->errors()->all()]);
+        }*/
+
         $new = new GlobalRoomMessages;
         $new->title = $request->title;
         if ($request->hasFile('file')){
@@ -39,8 +49,22 @@ class GlobalController extends Controller
     }
 
     public function home_page(){
-        $all_messages = GlobalRoomMessages::orderBy('created_at','desc')->get();
-        View::share('all_messages',$all_messages);
+        $popular_rooms = \App\GuestRoomMessages::select('room_number')->groupBy('room_number')->orderByRaw('COUNT(*) DESC') ->limit(4)->get();
+        View::share('popular_rooms',$popular_rooms);
+        $limit=0;
+        $temp=array();
+        for ($i=0; $i<=999999999;$i++){
+            if ($limit>=4){
+                break;
+            }
+            if (!\App\GuestRoomMessages::where('room_number',$i)->first() ){
+                array_push($temp,$i);
+                $limit+=1;
+            }
+        }
+        View::share('popular_rooms',$popular_rooms);
+        View::share('temp',$temp);
+
         return view('/welcome');
     }
     public function ajax_password(Request $request){

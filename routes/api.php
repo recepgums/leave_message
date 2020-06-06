@@ -29,6 +29,6 @@ Route::get('/private_room/{number}',function ($number){
     return $data;
 });
 Route::get('/',function (){
-    $data = \App\GlobalRoomMessages::orderBy('created_at','desc')->get();
+    $data = \App\GlobalRoomMessages::orderBy('created_at','desc')->limit(4)->get();
     return $data;
 });

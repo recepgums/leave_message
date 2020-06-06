@@ -6,7 +6,7 @@
 
                 </div>
                 <div class="card-body row text-center " style="height:10px;">
-                    <div v-if="item.title.includes('www.youtube.com') || item.title.includes('m.youtube.com') "
+                    <div v-if="item.title.includes('www.youtube.com') || item.title.includes('m.youtube.com') || item.title.includes('youtu.be')"
                          class="iframe-container text-center align-self-center "  >
                         <iframe width="1024" height="768" :src="youtube_link(item.title)" frameborder="0"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -34,7 +34,7 @@
 
                 <div class="card-footer border-top"   style="background-color: #28A745;border-radius:0px 0px 20px 20px">
                     <div style="text-align: right">
-                        <small class="text-white">{{item.created_at}}</small>
+                        <small class="text-white">{{moment().diff(item.created_at,"minutes") }} minutes ago</small>
                     </div>
                 </div>
             </div>
