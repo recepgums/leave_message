@@ -20,14 +20,14 @@ class GlobalController extends Controller
     }
 
     public function create_global(Request $request){
-        /*$rules = array(
-            'file'=>'required|max:1000'
+        $rules = array(
+            'file'=>'max:10000'
         );
-        $error = Validator::make($request->all(),$rules);*/
+        $error = Validator::make($request->all(),$rules);
 
-        /*if ($error->fails()){
+        if ($error->fails()){
             return response()->json(['error'=>$error->errors()->all()]);
-        }*/
+        }
 
         $new = new GlobalRoomMessages;
         $new->title = $request->title;
@@ -62,7 +62,6 @@ class GlobalController extends Controller
                 $limit+=1;
             }
         }
-        View::share('popular_rooms',$popular_rooms);
         View::share('temp',$temp);
 
         return view('/welcome');

@@ -110161,6 +110161,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -110204,11 +110241,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return url.replace('youtu.be/', 'www.youtube.com/embed/');
             } else if (url.includes('list')) {
                 return 'https://www.youtube.com/embed/' + url.substring(url.indexOf('watch?v=') + 8, url.indexOf('&list'));
+            } else if (url.includes('open.spotify.com')) {
+                return url.replace('spotify.com/', 'spotify.com/embed/');
             }
             return 'https://www.youtube.com/embed/' + url.substring(url.indexOf('watch?v=') + 8);
         },
-        spotify: function spotify(url) {
-            return url.replace('spotify.com/', 'spotify.com/embed/');
+        isUrl: function isUrl(text) {
+            var res = text.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+            return res !== null;
+        },
+        maxTitleLenght: function maxTitleLenght(text, key) {
+            if (text.length > 210) {
+                var last_version = text.substring(0, 198) + "...";
+
+                return last_version;
+            }
+            return text;
         }
     }
 });
@@ -110228,212 +110276,363 @@ var render = function() {
       staticStyle: { "text-align": "center" }
     },
     _vm._l(_vm.data, function(item, key) {
-      return _c(
-        "div",
-        {
-          key: key,
-          staticClass: "p-3 ",
-          staticStyle: { width: "280px", height: "300px" }
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "card card-small card-post mb-4 shadow",
-              staticStyle: {
-                width: "100%",
-                height: "100%",
-                "border-radius": "20px"
+      return _c("div", { key: key }, [
+        _vm.isUrl(item.title) || item.file_name !== null
+          ? _c(
+              "div",
+              {
+                staticClass: "p-3",
+                staticStyle: { width: "280px", height: "300px" }
               },
-              attrs: { name: "kart" }
-            },
-            [
-              _c("div", {
-                staticClass: "card-header ",
-                staticStyle: {
-                  "background-color": "#28A745",
-                  "border-radius": "20px 20px 0px 0px"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "card-body row text-center",
-                  staticStyle: { height: "10px" }
-                },
-                [
-                  item.title.includes("www.youtube.com") ||
-                  item.title.includes("m.youtube.com") ||
-                  item.title.includes("youtu.be")
-                    ? _c(
-                        "div",
-                        {
-                          staticClass:
-                            "iframe-container text-center align-self-center "
-                        },
-                        [
-                          _c("iframe", {
-                            attrs: {
-                              width: "1024",
-                              height: "768",
-                              src: _vm.youtube_link(item.title),
-                              frameborder: "0",
-                              allow:
-                                "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
-                              allowfullscreen: ""
-                            }
-                          })
-                        ]
-                      )
-                    : item.title.includes("open.spotify.com")
-                    ? _c(
-                        "div",
-                        {
-                          staticClass:
-                            "iframe-container text-center align-self-center "
-                        },
-                        [
-                          _c("iframe", {
-                            attrs: {
-                              src: _vm.spotify(item.title),
-                              frameborder: "0",
-                              allowtransparency: "true",
-                              allow: "encrypted-media"
-                            }
-                          })
-                        ]
-                      )
-                    : _c("h5", { staticClass: " col-12 text-center" }, [
-                        _vm._v(_vm._s(item.title))
-                      ]),
-                  _vm._v(" "),
-                  item.password !== null
-                    ? _c(
-                        "div",
-                        {
-                          staticClass: "text-center",
-                          staticStyle: {
-                            "margin-left": "auto",
-                            "margin-right": "auto"
-                          }
-                        },
-                        [
-                          _c("br"),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card card-small card-post mb-4 shadow",
+                    staticStyle: {
+                      width: "100%",
+                      height: "100%",
+                      "border-radius": "20px"
+                    },
+                    attrs: { name: "kart" }
+                  },
+                  [
+                    _c("div", {
+                      staticClass: "card-header ",
+                      staticStyle: {
+                        "background-color": "#28A745",
+                        "border-radius": "20px 20px 0px 0px"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "card-body row text-center",
+                        staticStyle: { height: "10px" }
+                      },
+                      [
+                        item.title.includes("www.youtube.com") ||
+                        item.title.includes("m.youtube.com") ||
+                        item.title.includes("youtu.be") ||
+                        item.title.includes("open.spotify.com")
+                          ? _c(
+                              "div",
                               {
-                                name: "model",
-                                rawName: "v-model",
-                                value: item.new_password,
-                                expression: "item.new_password"
-                              }
-                            ],
-                            staticClass:
-                              " align-self-center form-control mx-sm-3",
-                            staticStyle: {
-                              width: "auto",
-                              "margin-left": "auto",
-                              "margin-right": "auto"
-                            },
-                            attrs: {
-                              type: "password",
-                              placeholder: "Password...",
-                              name: "file_password_confirm"
-                            },
-                            domProps: { value: item.new_password },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  item,
-                                  "new_password",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("br"),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "btn btn-success",
-                              on: {
-                                click: function($event) {
-                                  return _vm.ajax_password(
-                                    this,
-                                    item.id,
-                                    item.new_password
-                                  )
-                                }
-                              }
-                            },
-                            [_vm._v("Download")]
-                          ),
-                          _vm._v(" "),
-                          _c("br")
-                        ]
-                      )
-                    : item.file_name !== null
-                    ? _c("div", { staticClass: "text-center full-width" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "card-text    text-center",
-                            staticStyle: { "text-align": "center" },
-                            attrs: {
-                              href: "/storage/global_files/" + item.file_name,
-                              target: "_blank"
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                           Download File\n                        "
+                                staticClass:
+                                  "iframe-container text-center align-self-center "
+                              },
+                              [
+                                _c("iframe", {
+                                  attrs: {
+                                    width: "1024",
+                                    height: "768",
+                                    src: _vm.youtube_link(item.title),
+                                    frameborder: "0",
+                                    allow:
+                                      "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+                                    allowfullscreen: ""
+                                  }
+                                })
+                              ]
                             )
-                          ]
+                          : _c("h5", { staticClass: " col-12 text-center" }, [
+                              _vm._v(_vm._s(item.title))
+                            ]),
+                        _vm._v(" "),
+                        item.password !== null
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "text-center",
+                                staticStyle: {
+                                  "margin-left": "auto",
+                                  "margin-right": "auto"
+                                }
+                              },
+                              [
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: item.new_password,
+                                      expression: "item.new_password"
+                                    }
+                                  ],
+                                  staticClass:
+                                    " align-self-center form-control mx-sm-3",
+                                  staticStyle: {
+                                    width: "auto",
+                                    "margin-left": "auto",
+                                    "margin-right": "auto"
+                                  },
+                                  attrs: {
+                                    type: "password",
+                                    placeholder: "Password...",
+                                    name: "file_password_confirm"
+                                  },
+                                  domProps: { value: item.new_password },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        item,
+                                        "new_password",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "btn btn-success",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.ajax_password(
+                                          this,
+                                          item.id,
+                                          item.new_password
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Download")]
+                                ),
+                                _vm._v(" "),
+                                _c("br")
+                              ]
+                            )
+                          : item.file_name !== null
+                          ? _c(
+                              "div",
+                              { staticClass: "text-center full-width" },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "card-text    text-center",
+                                    staticStyle: { "text-align": "center" },
+                                    attrs: {
+                                      href:
+                                        "/storage/global_files/" +
+                                        item.file_name,
+                                      target: "_blank"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            Download File\n                        "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "card-footer border-top",
+                        staticStyle: {
+                          "background-color": "#28A745",
+                          "border-radius": "0px 0px 20px 20px"
+                        }
+                      },
+                      [
+                        _c("div", { staticStyle: { "text-align": "right" } }, [
+                          _c("small", { staticClass: "text-white" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.moment
+                                  .duration(_vm.moment().diff(item.created_at))
+                                  .humanize()
+                              ) + " ago"
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          : _c(
+              "div",
+              {
+                staticClass: "p-3",
+                staticStyle: { width: "280px", height: "300px" }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: " card card-small card-post mb-4 shadow",
+                    staticStyle: {
+                      width: "100%",
+                      height: "100%",
+                      "border-radius": "20px"
+                    },
+                    attrs: { name: "kart" }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "card-header text-white ",
+                        staticStyle: {
+                          cursor: "pointer",
+                          height: "100%",
+                          "background-color": "#28A745",
+                          "border-radius": "20px 20px 0px 0px"
+                        },
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#exampleModal" + key
+                        },
+                        domProps: {
+                          innerHTML: _vm._s(_vm.maxTitleLenght(item.title))
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.maxTitleLenght(item.title, key)) +
+                            "\n                "
                         )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "card-footer border-top",
+                        staticStyle: {
+                          "background-color": "white",
+                          "border-radius": "0px 0px 20px 20px"
+                        }
+                      },
+                      [
+                        _c("div", { staticStyle: { "text-align": "right" } }, [
+                          _c("small", { staticStyle: { color: "#28A745" } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.moment
+                                  .duration(_vm.moment().diff(item.created_at))
+                                  .humanize()
+                              ) + " ago"
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              ]
+            ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "exampleModal" + key,
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "exampleModalLabel",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(item.title) +
+                        "\n                    "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal-footer",
+                      staticStyle: { "background-color": "#28A745" }
+                    },
+                    [
+                      _c("div", { staticStyle: { "text-align": "right" } }, [
+                        _c("small", { staticStyle: { color: "white" } }, [
+                          _vm._v(
+                            _vm._s(
+                              _vm.moment
+                                .duration(_vm.moment().diff(item.created_at))
+                                .humanize()
+                            ) + " ago"
+                          )
+                        ])
                       ])
-                    : _vm._e()
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "card-footer border-top",
-                  staticStyle: {
-                    "background-color": "#28A745",
-                    "border-radius": "0px 0px 20px 20px"
-                  }
-                },
-                [
-                  _c("div", { staticStyle: { "text-align": "right" } }, [
-                    _c("small", { staticClass: "text-white" }, [
-                      _vm._v(
-                        _vm._s(
-                          _vm.moment
-                            .duration(_vm.moment().diff(item.created_at))
-                            .humanize()
-                        ) + " ago"
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ]
-      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      ])
     }),
     0
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal-header",
+        staticStyle: { "background-color": "#28A745", color: "white" }
+      },
+      [
+        _c(
+          "h5",
+          { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+          [_vm._v("Modal title")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close",
+            attrs: {
+              type: "button",
+              "data-dismiss": "modal",
+              "aria-label": "Close"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
