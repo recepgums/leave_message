@@ -27,7 +27,8 @@ Route::post('ajaxprivate','GuestRoomMessagesController@ajax_private')->name('aja
 Route::get('test', function(){
     broadcast(new \App\Events\SendMessage);
 });
-
+Route::post('/get_link','GlobalController@get_link');
+Route::get('/l/{file_link}','GlobalController@get_file_with_link');
 /*Route::post('create_survey',function (Request $request){
     $data = new \App\GlobalQuestions();
     $data->question_title = $request->question_title;

@@ -54,7 +54,7 @@ class SendMessage implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        $all_messages = \App\GlobalRoomMessages::orderBy('created_at','desc')->limit(6)->get();
+        $all_messages = \App\GlobalRoomMessages::orderBy('created_at','desc')->get();
         return [
             'data' => $all_messages
         ];

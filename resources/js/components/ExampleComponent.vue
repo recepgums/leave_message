@@ -1,4 +1,5 @@
 <template>
+
   <div class="d-flex flex-wrap text-center" style="text-align:center">
       <div v-for="(item,key) in data" :key="key" >
           <div v-if="isUrl(item.title) || item.file_name !==null"  class="p-3" style="width:280px;height:300px;">
@@ -11,8 +12,10 @@
                           <iframe  width="1024" height="768" :src="youtube_link(item.title)" frameborder="0"
                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                    allowfullscreen></iframe>
+                          <!--<small class="small flex-wrap "><a target="_blank" :href="item.title">{{item.title.substring(0,40)}}</a></small>-->
                       </div>
-                      <h5 v-else class=" col-12 text-center" >{{item.title}}</h5>
+                      <h6 v-else-if="isUrl(item.title)" class=" col-12 text-center" ><a target="_blank" :href="item.title">{{item.title}}</a></h6>
+                      <h5 v-else class="col-12 text-center">{{item.title}}</h5>
                       <div v-if="item.password !== null" class="text-center" style="margin-left: auto;margin-right: auto;">
                           <br>
                           <input style="width: auto;margin-left: auto;margin-right: auto;" v-model="item.new_password" class=" align-self-center form-control mx-sm-3" type="password"
@@ -51,11 +54,11 @@
               </div>
           </div>
 
-          <div class="modal fade" v-bind:id="'exampleModal'+key" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div  class="modal fade" v-bind:id="'exampleModal'+key" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                      <div class="modal-header"  style="background-color:#28A745;color:white">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <div class="modal-content " style="border-radius: 20px;">
+                      <div class="modal-header  "  style="background-color:#28A745;color:white;border-radius: 20px 20px  0px 0px">
+                          <h5 class="modal-title" id="exampleModalLabel" >Leave Note</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                           </button>
@@ -63,7 +66,7 @@
                       <div class="modal-body" >
                           {{item.title}}
                       </div>
-                      <div class="modal-footer" style="background-color:#28A745">
+                      <div class="modal-footer" style="background-color:#28A745;border-radius:0px 0px 20px 20px">
                           <div style="text-align: right;">
                               <small style="color: white;">{{moment.duration(moment().diff(item.created_at)).humanize()}} ago</small>
                           </div>
@@ -131,6 +134,7 @@
                 var res = text.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
                 return (res !== null)
             },
+
             maxTitleLenght:function (text,key) {
                     if (text.length > 210 ){
                         let last_version = text.substring(0,198)+"..." ;

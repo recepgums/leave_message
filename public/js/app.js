@@ -110198,6 +110198,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -110250,6 +110252,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var res = text.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
             return res !== null;
         },
+
         maxTitleLenght: function maxTitleLenght(text, key) {
             if (text.length > 210) {
                 var last_version = text.substring(0, 198) + "...";
@@ -110336,7 +110339,17 @@ var render = function() {
                                 })
                               ]
                             )
-                          : _c("h5", { staticClass: " col-12 text-center" }, [
+                          : _vm.isUrl(item.title)
+                          ? _c("h6", { staticClass: " col-12 text-center" }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { target: "_blank", href: item.title }
+                                },
+                                [_vm._v(_vm._s(item.title))]
+                              )
+                            ])
+                          : _c("h5", { staticClass: "col-12 text-center" }, [
                               _vm._v(_vm._s(item.title))
                             ]),
                         _vm._v(" "),
@@ -110558,38 +110571,48 @@ var render = function() {
               "div",
               { staticClass: "modal-dialog", attrs: { role: "document" } },
               [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-body" }, [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(item.title) +
-                        "\n                    "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "modal-footer",
-                      staticStyle: { "background-color": "#28A745" }
-                    },
-                    [
-                      _c("div", { staticStyle: { "text-align": "right" } }, [
-                        _c("small", { staticStyle: { color: "white" } }, [
-                          _vm._v(
-                            _vm._s(
-                              _vm.moment
-                                .duration(_vm.moment().diff(item.created_at))
-                                .humanize()
-                            ) + " ago"
-                          )
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-content ",
+                    staticStyle: { "border-radius": "20px" }
+                  },
+                  [
+                    _vm._m(0, true),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(item.title) +
+                          "\n                    "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "modal-footer",
+                        staticStyle: {
+                          "background-color": "#28A745",
+                          "border-radius": "0px 0px 20px 20px"
+                        }
+                      },
+                      [
+                        _c("div", { staticStyle: { "text-align": "right" } }, [
+                          _c("small", { staticStyle: { color: "white" } }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.moment
+                                  .duration(_vm.moment().diff(item.created_at))
+                                  .humanize()
+                              ) + " ago"
+                            )
+                          ])
                         ])
-                      ])
-                    ]
-                  )
-                ])
+                      ]
+                    )
+                  ]
+                )
               ]
             )
           ]
@@ -110607,14 +110630,18 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "modal-header",
-        staticStyle: { "background-color": "#28A745", color: "white" }
+        staticClass: "modal-header  ",
+        staticStyle: {
+          "background-color": "#28A745",
+          color: "white",
+          "border-radius": "20px 20px  0px 0px"
+        }
       },
       [
         _c(
           "h5",
           { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-          [_vm._v("Modal title")]
+          [_vm._v("Leave Note")]
         ),
         _vm._v(" "),
         _c(

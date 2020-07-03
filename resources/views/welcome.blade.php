@@ -30,6 +30,7 @@
 
     <style>
         html, body {
+
             background-color: #fff;
             color: #636b6f;
             font-weight: 400;
@@ -125,6 +126,7 @@
             height: 30px;
             border-radius: 3px;
             margin: 10px;
+            width: 100%;
             text-align: left;
             background: #fff;
             box-shadow: inset 1px 3px 6px rgba(0, 0, 0, 0.12);
@@ -133,7 +135,7 @@
         #progress-wrp .progress-bar {
             height: 100%;
             border-radius: 3px;
-            background-color: #f39ac7;
+            background-color: #2ceb54;
             width: 0;
             box-shadow: inset 1px 1px 10px rgba(0, 0, 0, 0.11);
         }
@@ -145,23 +147,6 @@
             display: inline-block;
             color: #000000;
         }
-        .modal-mask {
-            position: fixed;
-            z-index: 9998;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, .2);
-            display: table;
-            transition: opacity .3s ease;
-        }
-
-        .modal-wrapper {
-            display: table-cell;
-            vertical-align: middle;
-        }
-
     </style>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script >
@@ -176,8 +161,9 @@
 <body onload="page_loaded()" class="" style="width: 100%/*background-image: url('https://i.ytimg.com/vi/aiU22lKiZbA/maxresdefault.jpg');*/">
 
 
-<div class="pb-2"  style="display: flex;color: #0c673b;border-bottom-color: #28A745;border: 5px solid #28A745;border-top-color: white;border-right-color: white;border-left-color: white">
-    <div class="row">
+
+<div class="pb-2"  style="display: flex;color: #0c673b;border-bottom-color: #28A745;border: 5px solid #28A745;border-top-color: white;border-right-color: white;border-left-color: white;position: -webkit-sticky;position: sticky;z-index: 1;top: 0px;background-color: white">
+    <div class="row" >
         <div class="col-3" id="hamburger_menu_icon">
             <div class="col-md" style="cursor:pointer;color: #0c673b;font-size: 25px">&#9776;</div>
         </div>
@@ -260,73 +246,123 @@
 </div>--}}
 
 <div class="row mt-2">
-    <div id="left_nav_content" class="col-2" style="border: 5px solid #28A745;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745;">
-        <div class="row">
+    <div id="left_nav_content" class="col-2" style="border: 5px solid #28A745;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745; ">
+        <div class="row" style="height: auto;position: -webkit-sticky;position: sticky;top: 20px;">
             <div class="col">
                 <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active list-group-item-success" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-                    <a class="list-group-item list-group-item-action list-group-item-success"  data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Create Stream</a>
-                    <a class="list-group-item list-group-item-action list-group-item-success"  data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Active Stream1</a>
-                    <a class="list-group-item list-group-item-action list-group-item-success"  data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Active Stream2</a>
+                    <a class="list-group-item list-group-item-action active list-group-item-success py-3 py-3 " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                    <a class="list-group-item list-group-item-action list-group-item-success py-3 py-3 "  data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Create Stream</a>
+                    <a class="list-group-item list-group-item-action list-group-item-success py-3 py-3"  data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Active Stream1</a>
+                    <a class="list-group-item list-group-item-action list-group-item-success py-3 py-3"  data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Active Stream2</a>
                 </div>
                 <div class="list-group"  role="tablist">
                     <br>
-                    <a class="list-group-item list-group-item-action list-group-item-success active"   data-toggle="list" href="#" role="tab" aria-controls="settings">Most Populer Rooms</a>
+                    <a class="list-group-item list-group-item-action list-group-item-success py-3 active"   data-toggle="list" href="#" role="tab" aria-controls="settings">Most Populer Rooms</a>
                     @foreach($popular_rooms as $item)
-                        <a class="list-group-item list-group-item-action list-group-item-success"  href="./private_room?&room_number={{$item->room_number}}" >{{$item->room_number}}</a>
+                        <a class="list-group-item list-group-item-action list-group-item-success py-3"  href="./private_room?&room_number={{$item->room_number}}" >{{$item->room_number}}</a>
                     @endforeach
                 </div>
                 <div class="list-group"  role="tablist">
                     <br>
-                    <a class="list-group-item list-group-item-action list-group-item-success active"  data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Empty Rooms</a>
+                    <a class="list-group-item list-group-item-action list-group-item-success py-3 active"  data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Empty Rooms</a>
                     @foreach($temp as $item)
-                        <a class="list-group-item list-group-item-action list-group-item-success"  href="./private_room?&room_number={{$item}}" >{{$item}}</a>
+                        <a class="list-group-item list-group-item-action list-group-item-success py-3"  href="./private_room?&room_number={{$item}}" >{{$item}}</a>
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
     <div class="col-10" id="contents">
-        <div class="col" >
-            <div class="container p-0">
-                <div class="row align-self-center align-items-center text-center container ml-0" style="background-color: white;width: 100%;">
-                    <div class="col-sm text-center" >
-                        <div class=" align-items-center justify-content-center text-center" style="height: 20%">
-                            <form id="file_upload_form"  method="post" enctype="multipart/form-data">
+        <div class="col "  style="align-items: center">
+            <div class="row">
+                @isset($link_data)
+                    <div class="d-flex flex-wrap text-center" style="text-align:center">
+                            <div   class="p-3" style="width:280px;height:300px;">
+                                <div class="card card-small card-post mb-4 shadow" name="kart" style=" width: 100%;height:100%;border-radius: 20px">
+                                    <div class="card-header " style="background-color: #28A745;border-radius:20px 20px 0px 0px ">
+                                    </div>
+                                    <div class="card-body row text-center" style="height:10px;">
+                                        <h5 v-else class="col-12 text-center">@isset($link_data->title) {{$link_data->title}}@endisset</h5>
+                                        @if(isset($link_data->password))
+                                            <div class="text-center" style="margin-left: auto;margin-right: auto;">
+                                                <br>
+                                                <input style="width: auto;margin-left: auto;margin-right: auto;" v-model="item.new_password" class=" align-self-center form-control mx-sm-3" type="password"
+                                                       placeholder="Password..." name="file_password_confirm"> <br>
+                                                <span  class="btn btn-success">Download</span>  <!--Here we should check password-->
+                                            </div>
+                                        @else
+                                            <div class="text-center full-width ">
+                                                <a href="/storage/get_link/{{$link_data->file_name}}" target="_blank" class="card-text    text-center"
+                                                   style="text-align: center;">
+                                                    Download File
+                                                </a>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="card-footer border-top"   style="background-color: #28A745;border-radius:0px 0px 20px 20px">
+                                        <div style="text-align: right">
+                                            <small class="text-white">{{$link_data->created_at}} </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+
+                @endisset
+                <div class="col "  >
+                    <div class="card card-small card-post mb-4" name="kart" style="border-radius: 20px;text-align: center;width: 100%;align-items: center;border-color: #28A745;border-style: dashed ;">
+                        <form  style="text-align: center" id="file_upload_form"  method="post" enctype="multipart/form-data">
+                            <div class="card-body row " style="align-items: center">
+
                                 @csrf
                                 <textarea  class="form-control col-xl-12"  type="text" name="title" id="title" placeholder="Share a youtube link or any text..." required></textarea>
 
-                                <div class="input-group justify-content-center align-items-center mt-2"  >
-                                    <input class="form-control col-xl-1" id="file_input" type="file" name="file"   style="display: none;font-size: 5px"/>
-                                    <input type="button" class="btn" value="Browse..." onclick="document.getElementById('file_input').click();" />
-                                    <input class="form-control col-xl-11" type="password" style="width:50%;margin-left: 8px;display: none" placeholder="Optional password..." id="password_input" name="password" />
+                                <div class=" justify-content-center align-items-center full-width mt-2"  >
+                                    <input class="form-control col-xl-1" id="file_input" multiple type="file" name="file"   style="display: none;font-size: 5px"/>
+                                    <button type="button" class="btn " style="background-color: #28A745;border-radius: 15px;" onclick="document.getElementById('file_input').click();">
+                                        <svg style="color:white;" class="bi bi-upload" width="1.8em" height="1.8em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M.5 8a.5.5 0 0 1 .5.5V12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8.5a.5.5 0 0 1 1 0V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8.5A.5.5 0 0 1 .5 8zM5 4.854a.5.5 0 0 0 .707 0L8 2.56l2.293 2.293A.5.5 0 1 0 11 4.146L8.354 1.5a.5.5 0 0 0-.708 0L5 4.146a.5.5 0 0 0 0 .708z"/>
+                                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0v-8A.5.5 0 0 1 8 2z"/>
+                                        </svg>
+                                    </button>
+
+                                    <span class="text-info" >Upload file</span>
+                                    <input class="form-control col-xl-11 mt-2 ml-3" type="password"  disabled placeholder="Password..." id="password_input" name="password" />
+                                    <input type="radio" name="upload_type" id="link" value="link" /> <label style="cursor: pointer;" for="link">Get a Link</label>
+                                    <input type="radio" name="upload_type" id="globaly" value="globaly" checked /> <label style="cursor: pointer;" for="globaly">Share Here</label>
+                                    <input class="form-control col-xl-11 mt-2 ml-3" type="text" readonly value="" id="link_input" style="display: none"/>
                                 </div>
 
-                                <div style="text-align: center" class="mt-3">
-                                    <input id="send_button" class="btn btn-success"  style="width: 100%" type="button" value="Send" />
+                                <div id="progress-wrp" style="display: none">
+                                    <div class="progress-bar"></div>
+                                    <div class="status">0%</div>
                                 </div>
-                            </form>
-                            <div id="progress-wrp" style="display: none">
-                                <div class="progress-bar"></div>
-                                <div class="status">0%</div>
+
                             </div>
-                            @if (isset($file_size_error))
-                                <div >
-                                    <ul>
-                                        <li class="text-danger">{{$file_size_error}}</li>
-                                    </ul>
-                                </div>
-                            @endif
-                        </div>
+                            <div class="card-footer border-top d-flex full-width " style="background-color: white;border-radius:0px 0px 20px 20px">
+                                <input id="send_button" class="btn btn-success"  disabled style="width: 100%" type="button" value="Share Here" />
+                            </div>
+                        </form>
+                        @if (isset($file_size_error))
+                            <div >
+                                <ul>
+                                    <li class="text-danger">{{$file_size_error}}</li>
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
+
             </div>
+
         </div>
         <script >
+            function resetForm($form) {
+                $form.find('input:text, input:password, input:file, select, textarea').val('');
+            }
             var Upload = function (file) {
                 this.file = file;
             };
-
             Upload.prototype.getType = function() {
                 return this.file.type;
             };
@@ -336,20 +372,22 @@
             Upload.prototype.getName = function() {
                 return this.file.name;
             };
-            Upload.prototype.doUpload = function () {
+            Upload.prototype.doUpload = function (isGlobally) {
                 var that = this;
                 var formData = new FormData();
-
+                var toWhere = "get_link";
                 // add assoc key values, this will be posts values
                 formData.append("file", this.file, this.getName());
                 formData.append("title",$("#title").val());
                 formData.append("password",$("#password_input").val());
                 //datalar buyaya yazılıyor.
                 formData.append("upload_file", true);
-
+                if(isGlobally){
+                    toWhere = "create_global";
+                }
                 $.ajax({
                     type: "POST",
-                    url: "create_global",
+                    url: toWhere,
                     xhr: function () {
                         var myXhr = $.ajaxSettings.xhr();
                         if (myXhr.upload) {
@@ -358,7 +396,11 @@
                         return myXhr;
                     },
                     success: function (data) {
-                        // your callback here
+                        resetForm($('#file_upload_form'));
+                        if(!isGlobally){
+                            $("#link_input").val(data.link);
+                            $("#link_input").css('display','block');
+                        }
                     },
                     error: function (error) {
                         console.log(error);
@@ -386,43 +428,90 @@
                 if (percent==100){
                     $("#file_upload_form").trigger('reset');
                     $("#progress-wrp").fadeOut();
-                    $("#password_input").hide();
+                    $("#password_input").prop('disabled',true);
                 }
             };
 
         </script>
         <script >
+            $(document).ready(function () {
+                $('#title').keyup(function () {
+                    if($('#title').val()){
+                        $("#send_button").prop('disabled',false)
+                    }else{
+                        $("#send_button").prop('disabled',true)
+                    }
+                });
+                $( "#file_input" ).change(function() {
+                    if($("#file_input").val()){
+                        $("#password_input").prop('disabled',false)
+                    }else {
+                        $("#password_input").prop('disabled',true)
+                    }
+                });
+                $('input[type=radio][name=upload_type]').change(function() {
+                    if (this.value == 'globaly') {
+                        $("#send_button").val("Share Here");
+                        $("#title").attr('placeholder','Share a youtube link or any text');
+                        if(!$("#title").val()){
+                            $("#send_button").prop('disabled',true)
+                        }
+                    }
+                    else if (this.value == 'link') {
+                        $("#send_button").val("Get a Link");
+                        if($("#file_input").val()){
+                            $("#send_button").prop('disabled',false);
+                        }else{
+                            $("#send_button").prop('disabled',true);
+                        }
+                        $("#title").attr('placeholder','Optional Title');
+                    }
+                });
+                $("#link_input").click(function () {
+                    $(this).select();
+                });
+            });
             $("#send_button").click( function (e) {
+                /*$("#password_input").hide();*/
                 //form submit edilidiğinde file inputundan files elementini çkip devam edebilir.böylece send tuşuna basınca başlar
+
                 var degisken = $("#file_input");
                 var file = degisken[0].files[0];
                 if(!file && $("#title").val()){
-                    $.ajax({
-                        type: "POST",
-                        url: "create_global",
-                        data: {title:$("#title").val()},
-                        success: function (data) {
-                            $("#title").val("")
-                        },
-                    });
+                    if($('#link').is(':checked')){
+                     alert("You can only share files for getting a link ")
+                    }else{
+                        $("#send_button").prop('disabled',true);
+                        $.ajax({
+                            type: "POST",
+                            url: "create_global",
+                            data: {title:$("#title").val()},
+                            success: function (data) {
+                                $("#title").val("");
+                                resetForm($('#file_upload_form'));
+
+                            },
+                        });
+                    }
                 }else{
-                    var upload = new Upload(file);
-                    $("#progress-wrp").show();
-                    // maby check size or type here with upload.getSize() and upload.getType()
-
-                    // execute upload
-                    upload.doUpload();
+                    if($('#globaly').is(':checked')){
+                        var upload = new Upload(file);
+                        $("#progress-wrp").show();
+                        upload.doUpload(true);
+                    }else{
+                        var upload = new Upload(file);
+                        $("#progress-wrp").show();
+                        upload.doUpload(false);
+                    }
                 }
-
             });
 
 
         </script>
         <div class="col">
             <div class="row" style="text-align: center;justify-content: center;">
-
                 <div class=" mb-2 ml-3"
-                    style="overflow-y:scroll;height: 1000px;float:left;width: 100%;">
+                    style="overflow-y:scroll;height: 700px;float:left;width: 100%;position: relative;"><!--height 70% idi-->
                     <div id="app">
                         <example-component></example-component>
                     </div>
@@ -430,12 +519,6 @@
                 </div>
 
                 <script >
-                    page_loaded=()=>{
-                        $.get(
-                            "/test",
-                        );
-
-                    };
                     let a = document.getElementById('file_input');
                     let b = document.getElementById('password_input');
                     a.onchange = function () {
@@ -458,6 +541,10 @@
         }
     });
 </script>
+<footer style="background: linear-gradient(white,rgb(40, 167, 69, .5));" class="text-white page-footer font-small teal pt-1">
+    <div class="footer-copyright text-center py-3">© 2020 Copyright
+    </div>
+</footer>
 </body>
 {{--<script>
     var quiz_counter=0;
