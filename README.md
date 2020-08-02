@@ -2,7 +2,7 @@
 
 live: 
 
-http://recepgumus.com
+https://anonymupload.com
 
 
 
