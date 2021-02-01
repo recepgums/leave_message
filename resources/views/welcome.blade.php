@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Leave Note</title>
-    <script src="{{asset('js/jscolor.js')}}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
@@ -158,17 +157,18 @@
         });
     </script>
 </head>
-<body onload="page_loaded()" class="" style="width: 100%/*background-image: url('https://i.ytimg.com/vi/aiU22lKiZbA/maxresdefault.jpg');*/">
+<body class="" style="width: 100%/*background-image: url('https://i.ytimg.com/vi/aiU22lKiZbA/maxresdefault.jpg');*/">
 
 
 
 <div class="pb-2"  style="display: flex;color: #0c673b;border-bottom-color: #28A745;border: 5px solid #28A745;border-top-color: white;border-right-color: white;border-left-color: white;position: -webkit-sticky;position: sticky;z-index: 1;top: 0px;background-color: white">
     <div class="row" >
-        <div class="col-3" id="hamburger_menu_icon">
+        <div class="col-3 d-none d-md-block" id="hamburger_menu_icon">
             <div class="col-md" style="cursor:pointer;color: #0c673b;font-size: 25px">&#9776;</div>
         </div>
         <div class="col-9">
-            <h4  style="text-align:center;color:#0c673b;justify-content: center">Leave Note</h4>
+            <h4  style="text-align:center;color:#0c673b;justify-content: center" class="d-none d-md-block">Leave Note</h4>
+            <span  style="text-align:center;color:#0c673b;justify-content: center;font-size: 15px;" class="d-xs-block d-md-none">LeaveNote</span>
         </div>
     </div>
     <div class="col-9">
@@ -197,7 +197,7 @@
     <div class="col-3" style="flex:3;top: 1px;right: 3em;" >
         <div class=" row align-items-start mt-1" >
             @if (Route::has('login'))
-                <div class="justify-content-center">
+                <div class="justify-content-center d-none d-md-block">
                     @auth
                         <a  style="color: #0c673b" class="btn btn-outline-light btn-sm " href="{{ url('/home') }}">Home</a>
                     @else
@@ -213,42 +213,10 @@
     </div>
 </div>
 
-{{--<div class="col-md col-sm col-lg p-2" style="display: flex;background-color: gray;height: auto;overflow-x: scroll">
-    <div id="quiz" style="flex:4" >
-        <quiz>
-
-        </quiz>
-    </div>
-    --}}{{--<div style="flex: 1" class="shadow" >
-        <div class="card card-small shadow " style="width: 288px;">
-            <form action="{{route('create_survey')}}" method="post">
-                @csrf
-                <div class="card-header " style="background-color: #152632;color:white;font-size: 20px;text-align: center;">
-                    <input name="question_title" type="text" class="form-control " placeholder="Ask a question...">
-                </div>
-                <div id="options_parent" class="list-group list-group-flush p-2" >
-                    <input id="answer" name="answer" style="border-color: #28A745;border-width: 2px" class="form-control mb-1" type="text" placeholder="Answer of question..." required>
-                    <input id="option_2" name="option_2" class="form-control" type="text" placeholder="Other option one..." required >
-                    <input id="option_3" style="display: none" name="option_3" class="form-control" type="text" placeholder="Other option two..."  >
-                    <input id="option_4" style="display: none" name="option_4" class="form-control" type="text" placeholder="Other option three..."  >
-                </div>
-                <div class="row ml-1">
-                    <div class="col-7">
-                        <a id="new_options_button" onclick="new_input()" class="btn btn-dark text-white">New Options</a>
-                    </div>
-                    <div class="col-5">
-                        <input class="btn btn-success" type="submit" value="Share">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>--}}{{--
-</div>--}}
-
-<div class="row mt-2">
-    <div id="left_nav_content" class="col-2" style="border: 5px solid #28A745;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745; ">
-        <div class="row" style="height: auto;position: -webkit-sticky;position: sticky;top: 20px;">
-            <div class="col">
+<div class="row mt-2 ">
+    <div id="left_nav_content " class="col-2 d-none d-md-block" style="border: 5px solid #28A745;border-left-color: #28A745;border-right-color: #28A745;border-top-color: white;border-bottom-color: #28A745; ">
+        <div class="row " style="height: auto;position: -webkit-sticky;position: sticky;top: 20px;">
+            <div class="col ">
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active list-group-item-success py-3 py-3 " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
                     <a class="list-group-item list-group-item-action list-group-item-success py-3 py-3 "  data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Create Stream</a>
@@ -272,7 +240,7 @@
             </div>
         </div>
     </div>
-    <div class="col-10" id="contents">
+    <div class="col-md-10 col-sm-12 col-xs-12" id="contents">
         <div class="col "  style="align-items: center">
             <div class="row">
                 @isset($link_data)
@@ -288,7 +256,7 @@
                                                 <br>
                                                 <input style="width: auto;margin-left: auto;margin-right: auto;" v-model="item.new_password" class=" align-self-center form-control mx-sm-3" type="password"
                                                        placeholder="Password..." name="file_password_confirm"> <br>
-                                                <span  class="btn btn-success">Download</span>  <!--Here we should check password-->
+                                                <span  class="btn btn-success">Download</span>
                                             </div>
                                         @else
                                             <div class="text-center full-width ">
@@ -309,9 +277,10 @@
                     </div>
 
                 @endisset
-                <div class="col "  >
-                    <div class="card card-small card-post mb-4" name="kart" style="border-radius: 20px;text-align: center;width: 100%;align-items: center;border-color: #28A745;border-style: dashed ;">
-                        <form  style="text-align: center" id="file_upload_form"  method="post" enctype="multipart/form-data">
+                <div style="display:none" class="col"  ondrop="alert('2sds');" ondragover="document.getElementById('areaDrop').style.backgroundColor='red'"
+                     ondragleave="document.getElementById('areaDrop').style.backgroundColor='white'" >
+                    <div class="card card-small card-post mb-4" id="areaDrop" style="border-radius: 20px;text-align: center;width: 100%;align-items: center;border-color: #28A745;border-style: dashed ;">
+                        <form  style="text-align: center" id="file_upload_form"   method="post" enctype="multipart/form-data">
                             <div class="card-body row " style="align-items: center">
 
                                 @csrf
@@ -327,7 +296,7 @@
                                     </button>
 
                                     <span class="text-info" >Upload file</span>
-                                    <input class="form-control col-xl-11 mt-2 ml-3" type="password"  disabled placeholder="Password..." id="password_input" name="password" />
+                                    <input class="form-control mt-2 ml-3 col-11" type="password"  disabled placeholder="Password..." id="password_input" name="password" />
                                     <input type="radio" name="upload_type" id="link" value="link" /> <label style="cursor: pointer;" for="link">Get a Link</label>
                                     <input type="radio" name="upload_type" id="globaly" value="globaly" checked /> <label style="cursor: pointer;" for="globaly">Share Here</label>
                                     <input class="form-control col-xl-11 mt-2 ml-3" type="text" readonly value="" id="link_input" style="display: none"/>
@@ -396,6 +365,7 @@
                         return myXhr;
                     },
                     success: function (data) {
+                        window.location.reload()
                         resetForm($('#file_upload_form'));
                         if(!isGlobally){
                             $("#link_input").val(data.link);
@@ -513,7 +483,7 @@
                 <div class=" mb-2 ml-3"
                     style="overflow-y:scroll;height: 700px;float:left;width: 100%;position: relative;"><!--height 70% idi-->
                     <div id="app">
-                        <example-component></example-component>
+                        <example-component  csrf="{{ csrf_token() }}"></example-component>
                     </div>
                     <script src="/js/app.js"></script>
                 </div>
@@ -561,8 +531,8 @@
 </script>--}}
 <script>
     window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
-</script>
+</script>{{--
 <script src="http://127.0.0.1:6001/socket.io/socket.io.js"  ></script>
-<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>--}}
 
 </html>

@@ -32,3 +32,10 @@ Route::get('/',function (){
     $data = \App\GlobalRoomMessages::orderBy('created_at','desc')->get();
     return $data;
 });
+Route::post('/removeFile',function (Request $request){
+    $data = \App\GlobalRoomMessages::find($request->id);
+//    unlink(storage_path('app/public/global_files/'.$data->file_name));
+//    \Illuminate\Support\Facades\Storage::delete($data->file_name);
+    $data->delete();
+   return response()->json(['status'=>200,"message"=>"Success"]);
+});

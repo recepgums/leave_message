@@ -28,11 +28,13 @@ import privateroom from './components/PrivateRoom.vue' //Importing
 import ExampleComponent from './components/ExampleComponent.vue' //Importing
 import BootstrapVue from 'bootstrap-vue' //Importing
 import moment from 'moment'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 
 Vue.prototype.moment = moment;
 
-
+Vue.use(ElementUI);
 Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 /**
  * Next, we will create a fresh Vue application instance and attach it to

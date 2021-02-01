@@ -6,6 +6,7 @@ use App\GlobalRoomMessages;
 use App\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Routing\UrlGenerator;
 use App\Events\SendMessage;
@@ -22,25 +23,21 @@ class GlobalController extends Controller
 
     public function create_global(Request $request){
         $rules = array(
-            'file'=>'max:10000'
+            'file'=>'max:3000000'
         );
         $error = Validator::make($request->all(),$rules);
 
         if ($error->fails()){
             return response()->json(['error'=>$error->errors()->all()]);
         }
-
         $new = new GlobalRoomMessages;
         $new->title = $request->title;
         if ($request->hasFile('file')){
-            $filenameWithExt = $request->file('file')->getClientOriginalName();
-            $filenameWithExt = trim($filenameWithExt);
-            $fileName = pathinfo($filenameWithExt,PATHINFO_FILENAME);
-            $extension = $request->file('file')->getClientOriginalExtension();
-            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('file')->storeAs('public/global_files',$fileNameToStore);
-        $new->file_name = $fileNameToStore;
+
+            $uploadingS3 = $request->file('file')->store('public/global_files','s3');
+            $new->file_name = Storage::disk('s3')->url($uploadingS3);
         }
+
         if($request->password){
             $new->password =Hash::make($request->password);
         }
@@ -116,7 +113,7 @@ class GlobalController extends Controller
     public function ajax_password(Request $request){
         $data = GlobalRoomMessages::find($request->id);
         if (password_verify($request->password, $data->password)) {
-            return response()->json(['status'=>200,'download_link'=>$this->url->to('/storage/global_files/'.$data->file_name)]);
+            return response()->json(['status'=>200,'download_link'=>$this->url->to($data->file_name)]);
         }else{
             return response()->json(['status'=>400,'message'=>"password incorrect"]);
         }

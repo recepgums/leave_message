@@ -180,21 +180,14 @@
 <script>
 
      start=()=> {
-        setTimeout(function () {
-            var time= setInterval(function () {
-                var value=(document.getElementById("animation").style.fontSize);
-                value=value.toString();
-                value=value.substring(0,value.indexOf("px"));
-
-                if(value<=60){
-                    value=value*1+8;
-                    value=value+"px";
-                    document.getElementById("animation").style.fontSize=value;
-                }else{
-                    clearInterval(time);
-                }
-            }, 100);
-        },1000);
+        var value=(document.getElementById("animation").style.fontSize);
+        value=value.toString();
+        value=value.substring(0,value.indexOf("px"));
+        if(value<=60){
+            value=value*1+8;
+            value=value+"px";
+            document.getElementById("animation").style.fontSize=value;
+        }
     }
 </script>
 </body>
