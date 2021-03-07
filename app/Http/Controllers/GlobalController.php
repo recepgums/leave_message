@@ -16,6 +16,7 @@ class GlobalController extends Controller
 {
     protected $url;
 
+
     public function __construct(UrlGenerator $url)
     {
         $this->url = $url;

@@ -8,7 +8,6 @@
 require('./bootstrap');
 require('moment');
 window.moment = require('moment/moment');
-window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
