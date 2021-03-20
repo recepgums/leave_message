@@ -2,7 +2,7 @@
     <div class="row" >
         <div v-for="(item,key) in files" :key="key"  class="col" >
             <div class="p-3 text-center mx-auto" style="width:280px;height:300px;">
-                <div class="card card-small card-post mb-4 shadow" style=" width: 100%;height:100%;border-radius: 20px">
+                <div class="card card-small card-post mb-4" style=" width: 100%;height:100%;border-radius: 20px">
                     <div class="card-header " style="background-color: #28A745;border-radius:20px 20px 0px 0px ">
                     </div>
                     <div class="card-body row text-center" style="height:10px;">
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    const appUrl = 'http://127.0.0.1:8000';
+    const appUrl = 'http://recepgumus.com';
     export default {
         name: "Files",
         props:['propsData'],

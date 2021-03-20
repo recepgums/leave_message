@@ -64,18 +64,22 @@
             </div>
         </div>
         <div class="d-sm-block d-md-none">
-                <div class="col message-div">
-                    <chat :propsData="texts"></chat>
-                </div>
+
                 <div class=" col p-0 message-div">
                     <files :propsData="files"></files>
                 </div>
+            <div class="col-md-3 col-sm-12">
+                <links :propsData="links"></links>
+            </div>
+            <div class="col message-div">
+                <chat :propsData="texts"></chat>
+            </div>
             </div>
     </div>
 </template>
 
 <script>
-    const appUrl = 'http://127.0.0.1:8000';
+    const appUrl = 'http://recepgumus.com';
     import axios from 'axios';
     import Chat from './components/Chat';
     import Links from './components/Links';

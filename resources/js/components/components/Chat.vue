@@ -8,7 +8,7 @@
                        <span v-else>{{item.title}}</span>
                     </div>
                     <div class="message-footer col">
-                        <div class="right bg-danger">
+                        <div class="right">
                             <small class="text-white">{{moment.duration(moment().diff(item.created_at)).humanize()}} ago</small>
                         </div>
                     </div>
@@ -41,9 +41,9 @@
 
 <style scoped>
     .en-dis{
-        background-color:#155724 ;
+        background-color:#636b6f ;
         border-radius: 20px;
-        height: 100px;
+        height: 80px;
         width: auto;
         margin: 20px 0;
         padding-top:15px;
@@ -51,10 +51,9 @@
     .message-div{
         overflow: scroll!important;
         font-size: 15px;
-        height: 60px;
-        color: wheat;
-        float: left;
-        text-align:left;
+        height: 40px;
+        color: white;
+        text-align: left;
     }
     .message-div::-webkit-scrollbar {
         display: none;  /* Safari and Chrome */
@@ -66,7 +65,6 @@
         bottom: 0;
     }
     .right{
-        width:60px;
         height:20px!important;
     }
     @media only screen and (max-width: 600px) {
