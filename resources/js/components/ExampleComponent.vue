@@ -79,7 +79,7 @@
 </template>
 
 <script>
-    const appUrl = 'http://recepgumus.com';
+    const appUrl = 'https://213.238.179.127';
     import axios from 'axios';
     import Chat from './components/Chat';
     import Links from './components/Links';

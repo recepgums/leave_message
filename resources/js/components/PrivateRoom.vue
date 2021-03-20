@@ -53,7 +53,7 @@
             }
         },
         mounted() {
-            axios.get('http://recepgumus.com/api/private_room/'+this.number)
+            axios.get('https://213.238.179.127/api/private_room/'+this.number)
             .then((response)=>{
                 this.data = response.data;
                 console.log("ahoj");
@@ -71,7 +71,7 @@
         },
         methods: {
             ajax_password: function (event, id, password) {
-                axios.post('http://recepgumus.com/ajaxprivate',{id:id,password: password})
+                axios.post('https://213.238.179.127/ajaxprivate',{id:id,password: password})
                     .then((response) => {
                         if(response.status==200){
                             let path = response.data.download_link;
