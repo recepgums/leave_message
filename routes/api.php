@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
+Route::post('/register', 'Api\AuthController@register');
+Route::post('/login', 'Api\AuthController@login');
+Route::get('/asd',function (){
+    dd('ss');
+})->middleware('auth:api');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -32,8 +37,6 @@ Route::get('/private_room/{number}',function ($number){
 Route::get('/', 'FollowController@index');
 Route::post('/removeFile',function (Request $request){
     $data = \App\GlobalRoomMessages::find($request->id);
-//    unlink(storage_path('app/public/global_files/'.$data->file_name));
-//    \Illuminate\Support\Facades\Storage::delete($data->file_name);
     $data->delete();
    Storage::disk('s3')->delete('public/global_files/fry0mkpnMFfOR2CXzRh7s3FEF06Kj2qtv9IdAz1D.pdf');
    return response()->json(['status'=>200,"message"=>"Success"]);

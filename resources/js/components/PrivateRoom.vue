@@ -53,7 +53,7 @@
             }
         },
         mounted() {
-            axios.get('https://213.238.179.127/api/private_room/'+this.number)
+            axios.get('http://127.0.0.1:8000/api/private_room/'+this.number)
             .then((response)=>{
                 this.data = response.data;
                 console.log("ahoj");
@@ -71,7 +71,7 @@
         },
         methods: {
             ajax_password: function (event, id, password) {
-                axios.post('https://213.238.179.127/ajaxprivate',{id:id,password: password})
+                axios.post('http://127.0.0.1:8000/ajaxprivate',{id:id,password: password})
                     .then((response) => {
                         if(response.status==200){
                             let path = response.data.download_link;

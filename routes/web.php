@@ -29,18 +29,6 @@ Route::get('test', function(){
 });
 Route::post('/get_link','GlobalController@get_link');
 Route::get('/l/{file_link}','GlobalController@get_file_with_link');
-/*Route::post('create_survey',function (Request $request){
-    $data = new \App\GlobalQuestions();
-    $data->question_title = $request->question_title;
-    $data->option_one = $request->answer;
-    $data->option_two = $request->option_2;
-    $data->option_three = $request->option_3;
-    $data->option_four = $request->option_4;
-    $data->correct_answer = $request->answer;
-    $data->save();
-    return redirect()->back();
-})->name('create_survey');*/
+Auth::routes();
 
-/*Route::get('private-test', function(){
-    broadcast(new \App\Events\PrivateMessage);
-});*/
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

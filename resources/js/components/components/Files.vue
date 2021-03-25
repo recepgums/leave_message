@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    const appUrl = 'https://213.238.179.127';
+    const appUrl = 'http://recepgumus.com';
     export default {
         name: "Files",
         props:['propsData'],
