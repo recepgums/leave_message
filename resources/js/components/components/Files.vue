@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    const appUrl = 'http://recepgumus.com';
+    const appUrl = 'https://anonymupload.com';
     export default {
         name: "Files",
         props:['propsData'],
