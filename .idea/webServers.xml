@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="9cfddc64-d2ed-4e4b-bfcc-12310fc6cb44" name="recepo" url="http://45.158.12.99">
-        <fileTransfer host="45.158.12.99" port="22" accessType="SFTP">
+      <webServer id="9cfddc64-d2ed-4e4b-bfcc-12310fc6cb44" name="recepo" url="http://45.200.120.228">
+        <fileTransfer host="45.200.120.228" port="22" rootFolder="/var/www/vhosts/anonymupload.com/httpdocs" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

@@ -247,10 +247,12 @@
                     <div id="app">
                         <example-component  csrf="{{ csrf_token() }}"></example-component>
                     </div>
-                    <script src="/js/app.js"></script>
+                    <script src="{{ mix('/js/app.js') }}"></script>
                 </div>
             </div>
         </div>
+    </div>
+</div>
     </div>
 </div>
 <script>
