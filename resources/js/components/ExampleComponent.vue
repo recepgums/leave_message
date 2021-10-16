@@ -5,15 +5,14 @@
                 <div class="col ">
                     <div class="card-body">
                         <div class="col  align-items-center full-width mt-2">
-                            <div class="col">
+                            <div class="col mb-2 p-0">
                                 <el-input
-                                    type="textarea"
+                                    type="input"
                                     :rows="3"
                                     placeholder="Share a youtube link or any text..."
                                     v-model="formInline.title">
                                 </el-input>
                             </div>
-                            <br>
                             <div class="col ">
                                 <el-upload
                                     class="upload-demo"
@@ -52,7 +51,7 @@
             </el-card>
 
         </div>
-        <div class="d-none d-md-block">
+        <div class="d-none d-md-block py-0 mt-2">
             <div class="row">
                 <div class="col-md-3 col-sm-12 message-div">
                     <chat :propsData="texts"></chat>
@@ -65,17 +64,18 @@
                 </div>
             </div>
         </div>
-        <div class="d-sm-block d-md-none">
-
-            <div class=" col p-0 message-div">
-                <files :propsData="files"></files>
-            </div>
-            <div class="col-md-3 col-sm-12">
-                <links :propsData="links"></links>
-            </div>
-            <div class="col message-div">
-                <chat :propsData="texts"></chat>
-            </div>
+        <div class="d-sm-block d-md-none py-0 mt-2 ">
+            <el-tabs class="py-0" :tab-position="'top'" :stretch="true">
+                <el-tab-pane label="Chat">
+                    <chat class="h-full" :propsData="texts"></chat>
+                </el-tab-pane>
+                <el-tab-pane label="Files">
+                    <files class="h-full" :propsData="files"></files>
+                </el-tab-pane>
+                <el-tab-pane label="Links">
+                    <links class="h-full" :propsData="links"></links>
+                </el-tab-pane>
+            </el-tabs>
         </div>
     </div>
 </template>
@@ -252,8 +252,43 @@
             max-width: 84% !important;
             left: -30px;
         }
+        textarea {
+            min-height:40px!important;
+            height:40px!important;
+        }
+
+        .el-textarea__inner{
+            padding:0!important
+        }
+        .col.align-items-center.full-width.mt-2{
+            padding:0!important
+        }
     }
 
+    .el-tabs__item.is-top{
+        background-color: #28A745;
+        color: white;
+        font-size: 18px;
+        position: sticky;
+        bottom: 0;
+    }
+    .el-tab-pane{
+        min-height:70%;
+        padding-top:10px;
+
+    }
+    .el-tabs__header{
+        margin:0;
+        position: sticky; top: 8vh;
+        z-index:9;
+    }
+    .el-tabs__item.is-top.is-active{
+        color: #28A745;
+        background-color: white;
+        font-size: 18px;
+        position: sticky;
+        bottom: 0;
+    }
     .file-dis {
         float: left;
         text-align: left;
@@ -270,4 +305,7 @@
         display: none; /* Safari and Chrome */
     }
 
+    .h-full{
+        min-height:100vh;
+    }
 </style>
