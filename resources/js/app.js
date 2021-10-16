@@ -1,3 +1,4 @@
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -5,8 +6,8 @@
  */
 
 require('./bootstrap');
-
-window.Vue = require('vue').default;
+require('moment');
+window.moment = require('moment/moment');
 
 /**
  * The following block of code may be used to automatically register your
@@ -17,10 +18,23 @@ window.Vue = require('vue').default;
  */
 
 // const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
+import Content from "./components/Content";
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('privateroom', require('./components/PrivateRoom.vue'));
+/*Vue.component('quiz', require('./components/quiz.vue'));*/
+import privateroom from './components/PrivateRoom.vue' //Importing
+import ExampleComponent from './components/ExampleComponent.vue' //Importing
+import BootstrapVue from 'bootstrap-vue' //Importing
+import moment from 'moment'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+Vue.prototype.moment = moment;
+
+Vue.use(ElementUI);
+Vue.use(BootstrapVue); // Telling Vue to use this in whole application
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,4 +43,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    components:{ExampleComponent,privateroom}
 });
