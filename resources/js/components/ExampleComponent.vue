@@ -64,9 +64,9 @@
                 </div>
             </div>
         </div>
-        <div class="d-sm-block d-md-none py-0 mt-2 ">
+        <div class="d-sm-block d-md-none py-0 mt-2">
             <el-tabs class="py-0" :tab-position="'top'" :stretch="true">
-                <el-tab-pane label="Chat">
+                <el-tab-pane label="Notes" class="mx-1">
                     <chat class="h-full" :propsData="texts"></chat>
                 </el-tab-pane>
                 <el-tab-pane label="Files">
@@ -278,9 +278,15 @@
 
     }
     .el-tabs__header{
-        margin:0;
-        position: sticky; top: 8vh;
+        margin:0 13px!important;
+        position: sticky; top: 9vh;
         z-index:9;
+    }
+    .el-tabs__nav-scroll{
+        border-radius:3px!important
+    }
+    .el-tabs__active-bar{
+        display:none!important
     }
     .el-tabs__item.is-top.is-active{
         color: #28A745;
