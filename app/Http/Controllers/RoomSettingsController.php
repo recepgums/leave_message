@@ -16,16 +16,11 @@ class RoomSettingsController extends Controller
         $this->validate($request, [
             'room_number' => 'required|between:0,9999999999|integer',
         ]);
-        $number=$request->room_number;
-        $all = GuestRoomMessages::where('room_number',$number)->orderBy('created_at','desc')->get();
-        if(!RoomSetting::where('room_number',$number)->first()){
-            $new = new RoomSetting();
-            $new->room_number = $number;
-            $new->save();
-        }
-        View::share('all',$all);
-        View::share('number',$number);
-        event(new PrivateMessage($request->room_number));
-        return view('private_room')->withErrors($request->all());
+        $messages = GuestRoomMessages::postsOfRooms($request->room_number);
+        $popular_rooms = \App\GuestRoomMessages::popularRooms();
+        $temp = \App\GuestRoomMessages::emptyRooms();
+
+//        event(new PrivateMessage($request->room_number));
+        return view('private_room',['temp'=>$temp,'popular_rooms'=>$popular_rooms,'number'=>$request->room_number]);
     }
 }

@@ -12,7 +12,7 @@
                             <br>
                             <input style="width: auto;margin-left: auto;margin-right: auto;" v-model="item.password"
                                    class=" align-self-center form-control mx-sm-3" type="password"
-                                   placeholder="Password..." name="file_password_confirm"> <br>
+                                   placeholder="Password..." autocomplete="off" name="file_password_confirm"> <br>
                             <div class="row">
                                 <div class="col">
                                           <span v-on:click="ajax_password(this,item.id,item.password,key)"
@@ -51,7 +51,7 @@
     const appUrl = process.env.MIX_API_URL;
     export default {
         name: "Files",
-        props: ['propsData'],
+        props: ['propsData','number'],
         data() {
             return {
                 files: [],
@@ -64,7 +64,8 @@
         },
         methods: {
             removeFile(id) {
-                axios.post(appUrl + '/api/removeFile', {id: id}).then(resp => {
+                let url = this.number ? appUrl + '/api/private-remove-file' : appUrl + '/api/removeFile';
+                axios.post(url, {id: id}).then(resp => {
                     this.$notify({
                         title: 'File Removed',
                         type: 'success',
@@ -94,7 +95,8 @@
                         message: 'You can try after 3 minutes'
                     });
                 } else {
-                    axios.post(appUrl + '/ajaxdeneme', {id: id, password: password}).then(resp => resp.data)
+                    let url  = this.number ? appUrl + '/ajaxprivate' : appUrl + '/ajaxdeneme';
+                    axios.post(url, {id: id, password: password}).then(resp => resp.data)
                         .then((response) => {
                             if (response.status === 200) {
                                 localStorage.removeItem('forgiving_time');

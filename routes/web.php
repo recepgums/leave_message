@@ -2,10 +2,10 @@
 
 use Illuminate\Http\Request;
 
-Route::get('/', 'GlobalController@home_page');
+Route::get('/', 'GlobalController@home_page')->name('home-page');
 Broadcast::routes();
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/eniyiler', 'HomeController@eniyiler')->name('homed');
@@ -24,11 +24,7 @@ Route::post('/private_room_create/{room_number}','GuestRoomMessagesController@cr
 Route::post('ajaxdeneme','GlobalController@ajax_password')->name('ajax_password');
 Route::post('ajaxprivate','GuestRoomMessagesController@ajax_private')->name('ajax_private');
 
-Route::get('test', function(){
-    broadcast(new \App\Events\SendMessage);
-});
 Route::post('/get_link','GlobalController@get_link');
 Route::get('/l/{file_link}','GlobalController@get_file_with_link');
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

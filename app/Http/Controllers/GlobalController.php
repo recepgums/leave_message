@@ -95,21 +95,10 @@ class GlobalController extends Controller
         dd("Only files can get a link!");
     }
     public function home_page(){
-        $popular_rooms = \App\GuestRoomMessages::select('room_number')->groupBy('room_number')->orderByRaw('COUNT(*) DESC') ->limit(4)->get();
-        View::share('popular_rooms',$popular_rooms);
-        $limit=0;
-        $temp=array();
-        for ($i=0; $i<=999999999;$i++){
-            if ($limit>=4){
-                break;
-            }
-            if (!\App\GuestRoomMessages::where('room_number',$i)->first() ){
-                array_push($temp,$i);
-                $limit+=1;
-            }
-        }
-        View::share('temp',$temp);
-        return view('/welcome');
+        $popular_rooms = \App\GuestRoomMessages::popularRooms();
+        $temp = \App\GuestRoomMessages::emptyRooms();
+
+        return view('welcome',['temp'=>$temp,'popular_rooms'=>$popular_rooms]);
     }
     public function ajax_password(Request $request){
         $data = GlobalRoomMessages::find($request->id);
@@ -120,6 +109,19 @@ class GlobalController extends Controller
         }
     }
 
+    public function privateRoomMessages($number)
+    {
+        $texts = \App\GuestRoomMessages::where('room_number',$number)->where('file_name',null)->select(['id','title','created_at'])->orderBy('created_at','desc')->get();
+        $files = \App\GuestRoomMessages::where('room_number',$number)->whereNotNull('file_name')->whereNotNull('password')->orderBy('created_at','desc')->select(['id','title','created_at'])->get();
+        return response()->json(['status'=>200,'texts'=>$texts,'files'=>$files]);
+    }
 
 
+    public function destroy(Request $request)
+    {
+        $data = \App\GlobalRoomMessages::find($request->id);
+        $data->delete();
+        Storage::disk('s3')->delete('public/global_files/fry0mkpnMFfOR2CXzRh7s3FEF06Kj2qtv9IdAz1D.pdf');
+        return response()->json(['status'=>200,"message"=>"Success"]);
+    }
 }

@@ -23,7 +23,7 @@ import Content from "./components/Content";
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('privateroom', require('./components/PrivateRoom.vue'));
 /*Vue.component('quiz', require('./components/quiz.vue'));*/
-import privateroom from './components/PrivateRoom.vue' //Importing
+import PrivateRoom from './components/PrivateRoom.vue' //Importing
 import ExampleComponent from './components/ExampleComponent.vue' //Importing
 import BootstrapVue from 'bootstrap-vue' //Importing
 import moment from 'moment'
@@ -43,5 +43,5 @@ Vue.use(BootstrapVue); // Telling Vue to use this in whole application
 
 const app = new Vue({
     el: '#app',
-    components:{ExampleComponent,privateroom}
+    components:{ExampleComponent,PrivateRoom}
 });

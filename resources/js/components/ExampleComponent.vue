@@ -18,7 +18,7 @@
                                     class="upload-demo"
                                     drag
                                     ref="upload"
-                                    action="/create_global"
+                                    :action="this.number ? '/private_room_create/'+number : '/create_global'"
                                     :on-change="handleUploadChange"
                                     :on-remove="handleRemove"
                                     :on-success="handleSuccess"
@@ -57,7 +57,7 @@
                     <chat :propsData="texts"></chat>
                 </div>
                 <div class="col-md-6 col-sm-12 p-0 message-div">
-                    <files :propsData="files"></files>
+                    <files :number="number" :propsData="files"></files>
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <links :propsData="links"></links>
@@ -70,7 +70,7 @@
                     <chat class="h-full" :propsData="texts"></chat>
                 </el-tab-pane>
                 <el-tab-pane label="Files">
-                    <files class="h-full" :propsData="files"></files>
+                    <files :number="number" class="h-full" :propsData="files"></files>
                 </el-tab-pane>
                 <el-tab-pane label="Links">
                     <links class="h-full" :propsData="links"></links>
@@ -88,7 +88,7 @@
     import Files from './components/Files'
 
     export default {
-        props: ['csrf'],
+        props: ['csrf','number'],
         components: {
             Chat, Files, Links
         },
@@ -115,8 +115,9 @@
         methods: {
             onSubmit() {
                 if (this.actualFiles.length <= 0) {
+                    let url = this.number ? appUrl + '/private_room_create/' + this.number : appUrl + '/create_global';
                     axios.post(
-                        appUrl + '/create_global',
+                        url,
                         {title: this.formInline.title},
                         {
                             headers: {'X-CSRF-TOKEN': this.csrf},
@@ -142,7 +143,6 @@
             handleProgress(progressEvent) {
                 let pers = Math.floor((progressEvent.loaded * 100) / progressEvent.total);
                 this.percentage = pers
-                console.log('asd', pers)
             },
             handleUploadChange(file) {
                 this.actualFiles.push(file);
@@ -163,30 +163,15 @@
                 console.log(files)
             },
             getDatas() {
-                axios.get(appUrl + '/api/')
+                let url = this.number ? appUrl + '/api/private_room/' + this.number : appUrl + '/api';
+                axios.get(url)
                     .then(resp => resp.data)
                     .then((response) => {
                         this.texts = response.texts;
                         this.links = response.texts;
                         this.files = response.files;
-                        this.formInline.title = null
+                        this.formInline.title = null;
                         this.formInline.password = null
-                    });
-            },
-
-
-            ajax_password: function (event, id, password, key) {
-                axios.post(appUrl + '/ajaxdeneme', {id: id, password: password})
-                    .then((response) => {
-                        if (response.data.status === 200) {
-                            this.files[key].remove = true
-                            this.files[key].title = this.data[key].title + " ";
-                            let path = response.data.download_link;
-                            window.open(path, '_blank');
-                        }
-                        if (response.data.status === 400) {
-                            alert('nt')
-                        }
                     });
             },
 
