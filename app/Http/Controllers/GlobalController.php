@@ -124,4 +124,5 @@ class GlobalController extends Controller
         Storage::disk('s3')->delete('public/global_files/fry0mkpnMFfOR2CXzRh7s3FEF06Kj2qtv9IdAz1D.pdf');
         return response()->json(['status'=>200,"message"=>"Success"]);
     }
+
 }

@@ -17,3 +17,4 @@ resources/sass
 /public/fonts/vendor/element-ui/lib/theme-chalk/element-icons.woff
 /package-lock.json
 public/js/app.js
+/.idea/

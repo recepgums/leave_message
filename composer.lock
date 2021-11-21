@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "682193fe16e70951faca8d97312e0a3a",
+    "content-hash": "0fee95ec7a072a8f5272fb428f475164",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2301,6 +2301,56 @@
                 }
             ],
             "time": "2020-12-10T11:35:44+00:00"
+        },
+        {
+            "name": "macroman/nitropack-api",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MacroMan/nitropack-api.git",
+                "reference": "290b87341cbed1db5e379315edc9fc839d40324a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MacroMan/nitropack-api/zipball/290b87341cbed1db5e379315edc9fc839d40324a",
+                "reference": "290b87341cbed1db5e379315edc9fc839d40324a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3|>=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "NitroPack": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Ivailo Hristov"
+                },
+                {
+                    "name": "Simeon Totev"
+                },
+                {
+                    "name": "Martin Tsvetkov"
+                },
+                {
+                    "name": "David Wakelin",
+                    "email": "hello@davidwakelin.co.uk"
+                }
+            ],
+            "description": "Unofficial API adapter for Nitropack",
+            "homepage": "https://github.com/MacroMan/nitropack-api",
+            "support": {
+                "issues": "https://github.com/MacroMan/nitropack-api/issues",
+                "source": "https://github.com/MacroMan/nitropack-api/tree/0.0.2"
+            },
+            "time": "2021-07-30T12:25:47+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8442,5 +8492,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }

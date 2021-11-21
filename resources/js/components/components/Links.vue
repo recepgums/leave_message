@@ -1,7 +1,7 @@
 <template>
    <div>
        <div v-for="item in propsData">
-           <div v-if="item.title.includes('www.youtube.com') || item.title.includes('m.youtube.com') || item.title.includes('youtu.be') || item.title.includes('open.spotify.com') "
+           <div v-if="item.title.includes('www.youtube.com') || item.title.includes('m.youtube.com') || item.title.includes('youtu.be') || item.title.includes('open.spotify.com')"
                 class="iframe-container text-center align-self-center en-dis"  >
                <iframe  width="1024" height="768" :src="youtube_link(item.title)" frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"

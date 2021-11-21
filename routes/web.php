@@ -1,11 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
-
 Route::get('/', 'GlobalController@home_page')->name('home-page');
-Broadcast::routes();
-
-//Auth::routes();
+Route::view('/start', 'start')->name('start-page');
+Route::get('/test', 'TestController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/eniyiler', 'HomeController@eniyiler')->name('homed');
@@ -18,7 +15,7 @@ Route::group(["prefix"=>"panel","middleware"=>["auth"]],function (){
 });
 Route::post('/create_global','GlobalController@create_global')->name('create_global');
 Route::post('/global_password_check/{message_id}','GlobalController@global_password_check')->name('global_password_check');
-Route::get('/private_room','RoomSettingsController@show_private_room')->name('show_private_room');
+Route::get('/p','RoomSettingsController@show_private_room')->name('show_private_room');
 Route::post('/private_room_create/{room_number}','GuestRoomMessagesController@create_private_room_message')->name('create_private_room_message');
 
 Route::post('ajaxdeneme','GlobalController@ajax_password')->name('ajax_password');

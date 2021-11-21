@@ -7,6 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Leave Note</title>
+    <meta property="og:description" content="Anonym Upload is the easiest way to send your files and texts around world">
+    <meta property="og:title" content="Anonym Upload - Share file and texts without logged in!">
+    <meta property="og:type" content="website" />
+
+    <meta name="description" content="Anonym Upload is the easiest way to send your files and texts around world. Share files and texts and get them on any devices. Sharing made easy!">
+    <meta name="keywords" content="upload, file upload, note, guest, share file ">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="author" content="{{env('APP_NAME')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
@@ -25,10 +35,20 @@
             });
         });
     </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163687006-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-163687006-1');
+    </script>
+
+
     @stack('styles')
 </head>
 <body class="bg-dark" style="width: 100%">
-
 
 
 <div class="pb-2"  style="display: flex;color: #0c673b;border-bottom-color: #28A745;border: 5px solid #28A745;border-top-color: white;border-right-color: white;border-left-color: white;position: -webkit-sticky;position: sticky;z-index: 1;top: 0px;background-color: white">
@@ -71,9 +91,8 @@
     </div>
 </div>
 <div class="row">
-    <div id="left_nav_content " class="col-2 d-none d-md-block"
-         style="border: 5px solid #28A745;border-top-color: #343a40; ">
-        <div class="row" style="height: auto;position: -webkit-sticky;position: sticky;top: 20px;">
+    <div id="left_nav_content " class="col-2 d-none d-md-block">
+        <div class="row pb-3 pt-2" style="height: auto;position: -webkit-sticky;position: sticky;top: 20px;border: 5px solid #28A745;border-top-color: #343a40;">
             <div class="col">
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active list-group-item-success py-3 py-3 "

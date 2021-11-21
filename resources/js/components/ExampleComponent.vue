@@ -59,7 +59,7 @@
                 <div class="col-md-6 col-sm-12 p-0 message-div">
                     <files :number="number" :propsData="files"></files>
                 </div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-3 col-sm-12 message-div">
                     <links :propsData="links"></links>
                 </div>
             </div>
@@ -167,8 +167,21 @@
                 axios.get(url)
                     .then(resp => resp.data)
                     .then((response) => {
-                        this.texts = response.texts;
-                        this.links = response.texts;
+                        let responseLinks = response.texts.filter(q=> (
+                            q.title.includes('www.youtube.com') ||
+                            q.title.includes('m.youtube.com') ||
+                            q.title.includes('youtu.be') ||
+                            q.title.includes('open.spotify.com')));
+                        if (this.links == null || this.links.length !== responseLinks.length){
+                            this.links = responseLinks;
+                        }
+                        let responseTextsOnly = response.texts.filter(q=> !(
+                            q.title.includes('www.youtube.com') ||
+                            q.title.includes('m.youtube.com') ||
+                            q.title.includes('youtu.be') ||
+                            q.title.includes('open.spotify.com')));
+                        this.texts = responseTextsOnly;
+
                         this.files = response.files;
                         this.formInline.title = null;
                         this.formInline.password = null
