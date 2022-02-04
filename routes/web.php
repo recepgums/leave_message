@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/', 'GlobalController@home_page')->name('home-page');
+Route::get('/f/{link}', 'GlobalController@getFileByLink');
 Route::view('/start', 'start')->name('start-page');
 Route::get('/test', 'TestController');
 
@@ -9,9 +10,6 @@ Route::get('/home/eniyiler', 'HomeController@eniyiler')->name('homed');
 Route::post('home/arama','HomeController@arama');
 
 Route::group(["prefix"=>"panel","middleware"=>["auth"]],function (){
-    Route::post('yeni_post_ekle','HomeController@postekle')->name('yeni_post_ekle');
-    Route::get('ajax_yeni_post_gir','HakkimdaController@ajax_yeni_post_gir');
-    Route::post('ajax_puan_guncelle','HomeController@ajax_puan_guncelle');
 });
 Route::post('/create_global','GlobalController@create_global')->name('create_global');
 Route::post('/global_password_check/{message_id}','GlobalController@global_password_check')->name('global_password_check');

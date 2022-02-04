@@ -22,30 +22,6 @@ class GlobalController extends Controller
         $this->url = $url;
     }
 
-    public function create_global(Request $request){
-        $rules = array(
-            'file'=>'max:3000000'
-        );
-        $error = Validator::make($request->all(),$rules);
-
-        if ($error->fails()){
-            return response()->json(['error'=>$error->errors()->all()]);
-        }
-        $new = new GlobalRoomMessages;
-        $new->title = $request->title;
-        if ($request->hasFile('file')){
-
-            $uploadingS3 = $request->file('file')->store('public/global_files','s3');
-            $new->file_name = Storage::disk('s3')->url($uploadingS3);
-        }
-
-        if($request->password){
-            $new->password =Hash::make($request->password);
-        }
-        $new->save();
-        event(new SendMessage());
-        return redirect('/');
-    }
 
     public function get_file_with_link(Request $request , $file_link){
         $link = "127.0.0.1:8000/l/".$file_link;
@@ -125,4 +101,40 @@ class GlobalController extends Controller
         return response()->json(['status'=>200,"message"=>"Success"]);
     }
 
+
+    public function getFileByLink(Request $request,$link)
+    {
+        $file = GlobalRoomMessages::where('link',$link)->firstOrFail();
+
+        return \view('get_file_by_url',compact('file'));
+    }
+
+    public function create_global(Request $request)
+    {
+        $rules = array(
+            'file' => 'max:3000000'
+        );
+        $error = Validator::make($request->all(), $rules);
+
+        if ($error->fails()) {
+            return response()->json(['error' => $error->errors()->all()]);
+        }
+        $new = new GlobalRoomMessages;
+        $new->title = $request->title;
+        if ($request->hasFile('file')) {
+
+            $uploadingS3 = $request->file('file')->store('public/global_files', 's3');
+            $new->file_name = Storage::disk('s3')->url($uploadingS3);
+        }
+
+        if ($request->password) {
+            $new->password = Hash::make($request->password);
+        }
+        $new->save();
+        event(new SendMessage());
+        if ($request->json()) {
+            return response()->json(['data' => $new]);
+        }
+        return redirect('/');
+    }
 }

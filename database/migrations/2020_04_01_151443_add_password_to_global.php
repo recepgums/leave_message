@@ -15,6 +15,8 @@ class AddPasswordToGlobal extends Migration
     {
         Schema::table('global', function (Blueprint $table) {
             $table->string('password')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('link')->nullable();
         });
     }
 
