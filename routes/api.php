@@ -36,3 +36,4 @@ Route::get('/', 'FollowController@index');
 Route::get('/get/{id}', 'FollowController@detail');
 Route::post('/removeFile','GlobalController@destroy');
 Route::post('/private-remove-file','GuestRoomMessagesController@destroy');
+Route::post('/{post}/password', 'GlobalController@password');

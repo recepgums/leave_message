@@ -147,4 +147,19 @@ class GlobalController extends Controller
         }
         return redirect('/');
     }
+
+    public function password($postId, Request $request)
+    {
+
+        $data = GlobalRoomMessages::find($postId);
+        if (!$data) {
+            return response()->json(['message' => "File couldn't find"], 404);
+        }
+        if (password_verify($request->password, $data->password)) {
+            return response()->json(['download_link' => $this->url->to($data->file_name)], 200);
+        } else {
+            return response()->json(['message' => "password incorrect"], 400);
+        }
+    }
+
 }
