@@ -11,8 +11,7 @@ class GlobalRoomMessages extends Model
 
     protected $guarded= [];
 
-    public static function boot() {
-        parent::boot();
+   /* public static function boot() {
 
         static::creating(function ($model) {
             if ($model->file_name){
@@ -21,5 +20,5 @@ class GlobalRoomMessages extends Model
                 $model->save();
             }
         });
-    }
+    }*/
 }
