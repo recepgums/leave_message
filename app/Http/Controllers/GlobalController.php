@@ -140,6 +140,10 @@ class GlobalController extends Controller
         if ($request->password) {
             $new->password = Hash::make($request->password);
         }
+
+        if (auth('api')->check()){
+            $new->user_id = auth('api')->id();
+        }
         $new->save();
         event(new SendMessage());
         if ($request->json()) {
