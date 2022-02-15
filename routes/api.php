@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login')->name('login');
-Route::post('/', [\App\Http\Controllers\GlobalController::class,'create_global']);
+Route::get('/', [\App\Http\Controllers\GlobalController::class,'create_global']);
 
 Route::group(['middleware'=>'auth:api'], function(){
     Route::get('/me', 'Api\AuthController@me');
