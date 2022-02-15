@@ -32,7 +32,7 @@ Route::get('/survey', function (){
    return response()->json(['status'=>200,'data'=>$data]);
 });
 Route::get('/private_room/{number}','GlobalController@privateRoomMessages');
-Route::get('/', 'FollowController@index');
+Route::get('/asd', 'FollowController@index');
 Route::get('/get/{id}', 'FollowController@detail');
 Route::post('/removeFile','GlobalController@destroy');
 Route::post('/private-remove-file','GuestRoomMessagesController@destroy');
