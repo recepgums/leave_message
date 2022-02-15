@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 
 Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login')->name('login');
+Route::post('/', 'GlobalController@create_global');
 
 Route::group(['middleware'=>'auth:api'], function(){
     Route::get('/me', 'Api\AuthController@me');
@@ -31,7 +32,6 @@ Route::get('/survey', function (){
    return response()->json(['status'=>200,'data'=>$data]);
 });
 Route::get('/private_room/{number}','GlobalController@privateRoomMessages');
-Route::post('/', 'GlobalController@create_global');
 Route::get('/', 'FollowController@index');
 Route::get('/get/{id}', 'FollowController@detail');
 Route::post('/removeFile','GlobalController@destroy');
