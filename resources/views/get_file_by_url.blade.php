@@ -1,7 +1,7 @@
 @extends('template')
 @section('component')
     <div class="container">
-       <div class="card col-6 text-center mx-auto mt-5 pt-5">
+       <div class="card col-6 col-sm-10 text-center mx-auto mt-5 pt-5">
            <div class="col-12 text-center mx-auto py-2">
                <h3 class="text-center text-accent">Download File</h3>
                <form action="{{route('download_file_attempt')}}" method="post" >
