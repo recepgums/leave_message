@@ -16,7 +16,7 @@ Route::get('/seeder', function (){
         $rand =random_int(0,1);
         \App\GlobalRoomMessages::create([
             'title' => 'Test '. random_int(100,1000),
-            'file_name' => $rand ?  array_rand($fileArray) : null,
+            'file_name' => $rand ?  $fileArray[array_rand($fileArray)] : null,
             'password' => $rand ? Hash::make('12345678') : null,
             'user_id' => $rand ? 1: null,
             'link' => env('APP_URL') . "/f/" . Str::random(20)
