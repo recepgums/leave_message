@@ -147,6 +147,7 @@ class GlobalController extends Controller
 
     public function create_global(Request $request)
     {
+        dd(auth('api')->id());
         $rules = array(
             'file' => 'max:3000000'
         );
@@ -169,7 +170,7 @@ class GlobalController extends Controller
         if ($request->password) {
             $new->password = Hash::make($request->password);
         }
-        dd(auth('api')->id());
+
         if (auth('api')->check()){
             $new->user_id = auth('api')->id();
         }
