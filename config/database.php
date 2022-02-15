@@ -82,6 +82,15 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'server_mysql' => [
+            'driver' => 'mysql',
+            'host' => env('SERVER_DB_HOST', '127.0.0.1'),
+            'port' => env('SERVER_DB_PORT', '3306'),
+            'database' => env('SERVER_DB_DATABASE', 'forge'),
+            'username' => env('SERVER_DB_USERNAME', 'forge'),
+            'password' => env('SERVER_DB_PASSWORD', ''),
+        ],
+
     ],
 
     /*
