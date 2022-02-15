@@ -169,7 +169,7 @@ class GlobalController extends Controller
         if ($request->password) {
             $new->password = Hash::make($request->password);
         }
-
+        dd(auth('api')->id());
         if (auth('api')->check()){
             $new->user_id = auth('api')->id();
         }
