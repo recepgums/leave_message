@@ -2,6 +2,7 @@
 
 Route::get('/', 'GlobalController@home_page')->name('home-page');
 Route::get('/f/{link}', 'GlobalController@getFileByLink');
+Route::post('/f/download', 'GlobalController@getFileByLinkCheck')->name('download_file_attempt');
 Route::view('/start', 'start')->name('start-page');
 Route::get('/test', 'TestController');
 

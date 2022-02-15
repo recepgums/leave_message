@@ -6,6 +6,7 @@ use App\GlobalRoomMessages;
 use App\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Routing\UrlGenerator;
@@ -112,8 +113,36 @@ class GlobalController extends Controller
     public function getFileByLink($link)
     {
         $file = GlobalRoomMessages::where('link', 'like', '%' . $link . '%')->firstOrFail();
+        if ($file->user_id === null){
+            $filename = $file->file_name;
+            $fileContent = file_get_contents($filename);
 
-        return \view('get_file_by_url', compact('file'));
+            return response($fileContent, 200, [
+                'Content-Type' => 'application/json',
+                'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+            ]);
+        }
+        $popular_rooms = \App\GuestRoomMessages::popularRooms();
+        $temp = \App\GuestRoomMessages::emptyRooms();
+        $asd = "dsads";
+        return \view('get_file_by_url', compact('file','temp', 'popular_rooms','asd'));
+    }
+
+    public function getFileByLinkCheck(Request $request)
+    {
+        $data = GlobalRoomMessages::findOrFail($request->file_id);
+
+        if (!password_verify($request->password, $data->password)) {
+            return response()->json(['message' => "password incorrect"], 400);
+        }
+
+        $filename = $data->file_name;
+        $fileContent = file_get_contents($filename);
+
+        return response($fileContent, 200, [
+                'Content-Type' => 'application/json',
+                'Content-Disposition' => 'attachment; filename="'.$filename.'"',
+            ]);
     }
 
     public function create_global(Request $request)

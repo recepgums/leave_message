@@ -91,6 +91,8 @@
     </div>
 </div>
 <div class="row">
+    @if(!isset($asd))
+
     <div id="left_nav_content " class="col-2 d-none d-md-block">
         <div class="row pb-3 pt-2" style="height: auto;position: -webkit-sticky;position: sticky;top: 20px;border: 5px solid #28A745;border-top-color: #343a40;">
             <div class="col">
@@ -125,6 +127,8 @@
             </div>
         </div>
     </div>
+    @endif
+
     <div class="col-md-10 col-sm-12 col-xs-12" id="contents">
         <div class="col" style="align-items: center">
             <div class="row " style="text-align: center;justify-content: center;">
